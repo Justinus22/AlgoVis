@@ -38,3 +38,8 @@
 .header a.active {
   color: #fcb8d2;
 }
+.header a.title:hover,
+.header a.title:active,
+.header a.title.active {
+  color: white;
+}

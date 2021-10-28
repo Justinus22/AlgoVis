@@ -16,15 +16,16 @@ function Navbar(props) {
         </ul>
       </nav>
       <div className={classes.title}>
-        Algorithm Visulaisation
+        <Link to="/" className={classes.title}> Algorithm Visulaisation </Link>
       </div>
       <nav>
       <ul>
         <li>
-          <a href='https://github.com/Justinus22/AlgoVis/tree/master' target="_blank" rel="noreferrer"> My Github </a>
+          <Link to="/Account"> Account </Link>
         </li>
         <li>
-          <Link to="/"> Homepage </Link>
+
+          <Link to="/WebsiteDetails"> Website Details </Link>
         </li>
       </ul>
       </nav>
