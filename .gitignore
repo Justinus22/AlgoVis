@@ -12,6 +12,7 @@
 /build
 
 /.notneeded
+/.vs
 
 # misc
 .DS_Store
