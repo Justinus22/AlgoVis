@@ -1,30 +1,16 @@
 import { Route , Switch} from 'react-router-dom'
-import {useContext } from "react"
 
 import Layout from "./components/layout/Layout"
 
-import AllAlgorithmOverview from "./pages/AllAlgorithmOverview"
+import AllAlgorithmOverview from "./pages/Overview/AllAlgorithmOverview"
 import WebsiteDetails from "./pages/WebsiteDetails"
 import Account from "./pages/Account"
-
-import OnOpenContext from "./contexts/OnOpenContext"
-
+import SmoothScroll from './components/SmoothScroll/SmoothScroll'
 
 function App() {
 
-  const onopenCtx = useContext(OnOpenContext);
-
-
-
-  window.addEventListener('wheel',(event) => {
-      if(onopenCtx.onopen){
-        onopenCtx.setonopen(false)
-
-      }
-  });
-
-
   return (
+  // <SmoothScroll>
     <Layout>
       <Switch>
         <Route path='/' exact>
@@ -38,6 +24,7 @@ function App() {
         </Route>
       </Switch>
     </Layout>
+// </SmoothScroll>
   );
 }
 

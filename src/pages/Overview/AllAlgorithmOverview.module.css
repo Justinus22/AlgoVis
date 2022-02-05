@@ -1,0 +1,14 @@
+.page{ 
+  /* display: flex;
+  justify-content: center; */
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-color: var(--secondColor);
+
+}
+
+.chapter{
+  width: 70%;
+  margin: auto;
+}

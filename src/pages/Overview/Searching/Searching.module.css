@@ -1,0 +1,43 @@
+.title{
+	width: 60%;
+	height: 4.5rem;
+	background: var(--firstColor);
+	color: var(--secondColor);
+	border-radius: 1rem;
+
+	margin: auto;
+	margin-top: 20rem;
+	margin-bottom: 3rem;
+
+	text-align: center;
+	font-size: 3rem;
+}
+.table{
+	width:100%;	
+}
+
+.card{
+	position: relative;
+	width:  70%;
+	margin: auto;
+	margin-top: 0;
+
+	text-align: center;
+
+	transition: 0.4s;
+}
+.card:hover{
+	transform: scale(1.2);
+}
+.cardtitle{
+	color: var(--firstColor);
+	font-size: 2rem;
+}
+
+
+
+
+
+
+
+

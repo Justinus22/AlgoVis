@@ -1,12 +1,16 @@
 import Navbar from "./navbar/Navbar"
-import OnOpenWrapper from "../wrapper/OnOpenWrapper"
+import classes from "./Layout.module.css"
+
 
 function Layout(props) {
   return (
-    <OnOpenWrapper>
-      <Navbar />
-      {props.children}
-    </OnOpenWrapper>
+    <div>
+        <Navbar />
+        <div className={classes.content}>
+          {props.children}
+        </div>
+        
+    </div>
   );
 }
 
