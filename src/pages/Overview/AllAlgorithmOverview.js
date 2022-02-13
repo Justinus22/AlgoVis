@@ -1,12 +1,13 @@
 import Searching from "./Searching/Searching.js"
+import Sorting from "./Sorting/Sorting.js"
 
 import classes from "./AllAlgorithmOverview.module.css"
 
 
 
-function AllAlgorithmOverview(props) {
+function AllAlgorithmOverview(props) { 
 
-  // const importFiles = (dir) => {
+  // const importFiles = (dir) => { 
   //   return listReactFiles(dir).then(files => {
   //     return files
   //   })
@@ -16,13 +17,14 @@ function AllAlgorithmOverview(props) {
 
   // console.log(temp)
 
+
   return (
     <div className={classes.page}>
       <div className={classes.chapter}>
-        <Searching />
+        <Sorting />
       </div>
       <div className={classes.chapter}>
-        <Searching />
+        <Sorting />
       </div>
       <div className={classes.chapter}>
         <Searching />

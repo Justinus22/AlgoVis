@@ -3,9 +3,12 @@
   justify-content: center; */
   position: relative;
   height: 100vh;
+
   background-size: cover;
   background-color: var(--secondColor);
 
+  top: 15vH
+ 
 }
 
 .chapter{

@@ -1,8 +1,7 @@
 .outer{
 	position: relative;
 	width: 100%;
-	margin-top: 10vH;
-	
+	margin-top: 10vH;	
 }
 
 .select{
@@ -14,6 +13,8 @@
 	gap: 5vH;
 
 	grid-template-columns: 1fr 1fr;
+    grid-row-gap: 5vH;
+    grid-column-gap: 1vW;
 }
 
 .title{
@@ -43,10 +44,15 @@
 	text-align: center;
 
 	transition: 0.4s;
+
 }
 .card:hover{
 	transform: scale(1.2);
 }
+.card a{
+    text-decoration: none;
+}
+
 .cardtitle{
 	color: var(--firstColor);
 	font-size: 2rem;

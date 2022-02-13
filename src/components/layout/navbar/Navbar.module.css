@@ -1,13 +1,16 @@
 :root{
   --title-pos: 0vH;
   --title-size: 100px;
+  /* goes to  24px*/
   --ul-padding: 1.5rem;
   --nav-visibility: 0;
+  --nav-size: 0vW; 
+  /* goes to 15vW */
 }
 .nav {
   position: fixed;
   width: 100%;
-  height: var(--navbar-height);
+  height: var(--navbar-start-height);
   z-index: 1;
   top: 0;
   left: 0;
@@ -42,13 +45,13 @@
 .nav ul li {
   position: relative;
   margin: auto;
-  margin-top: calc(var(--navbar-height)/2 - var(--title-size) - var(--ul-padding));
+  margin-top: calc(var(--navbar-start-height)/2 - var(--title-size) - var(--ul-padding));
 }
 .gitlink, .homepagelink, .accountlink, .detailslink{
-    transition: all 1s ease;
-    font-size: 1.5rem;
+    transition: all 0.6s ease;
+    font-size: 1.5rem; 
 
-    opacity: var(--nav-visibility);
+    margin: auto;
 }
 .nav a {
   transition: 0.2s;
@@ -70,7 +73,9 @@
 
 .navel{
   transition: 1s;
-  /* opacity: 0; */
+  opacity: var(--nav-visibility);
+  width: var(--nav-size);
+  text-align: center;
 }
 
 

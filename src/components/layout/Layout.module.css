@@ -1,4 +1,4 @@
 .content{
     position: relative;
-    top: var(--navbar-height);
-}
+    top: var(--navbar-end-height);
+} 
