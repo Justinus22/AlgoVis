@@ -13,7 +13,8 @@
 
 /.notneeded
 /.vs
-/gittocken
+
+/gittocken.txt
 # misc
 .DS_Store
 .env.local
