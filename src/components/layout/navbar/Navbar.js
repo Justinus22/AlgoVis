@@ -4,7 +4,7 @@ import classes from "./Navbar.module.css"
 
 // import DartSvg from "../../svg/DartSvg"
 
-// import { useEffect } from "react";
+import { useState } from "react";
 
 import { Link } from "react-router-dom"
 
@@ -12,15 +12,14 @@ function Navbar(props) {
 
   let root = document.querySelector(':root');
   
+  const [currentLocation, setCurrenLocation] = useState(window.location.pathname);
   
-  // const [onOpen, setOnOpen] = useState(true);
-
   const animationMultiplier = 1.5;
 
 
   const handleScoll = function(){
     var currentLocation = window.location.pathname;
-    // console.log(currentLocation)
+    console.log(currentLocation)
     if(currentLocation === "/" || currentLocation === "/home"){
       var offset = window.pageYOffset || document.documentElement.scrollTop
       if(offset > 88 * animationMultiplier){

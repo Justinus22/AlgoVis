@@ -27,4 +27,8 @@ code {
   --navbar-end-height: 12vH;
   --first-headline-size: 4rem;
   --normal-text-font-size: 1.6rem;
+
+  --sorting-bar-align: flex-end;
+
+  --animation-color: #8100ac;
 }

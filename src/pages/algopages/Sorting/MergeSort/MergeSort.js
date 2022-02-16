@@ -2,6 +2,8 @@ import classes from "./MergeSort.module.css"
 
 import { useState, useEffect } from "react"
 
+import getAnimationsMergeSort from "./mergesortalgorithm.js"
+
 function randomIntFromInterval(min, max) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -16,18 +18,27 @@ function BubbleSort(props){
 
     const [array, setArray] = useState([])
     const [size, setSize] = useState(50);
+    // const [pre_size, setPreSize] = useState(size);
 
     const root = document.querySelector(':root');
     // let array = []
 
     var resetArray = function() {
-        console.log(size)
         const temp_array = [];
         for (let i = 0; i < size; i++) {
           temp_array.push(randomIntFromInterval(5, 300));
         }
+        root.style.setProperty("--number-of-bars", size);
+        // let zeros = Array.apply(null, {length: size}).fill(5);
+        // if(pre_size < size){
+        //     setArray(zeros)
+        //     setTimeout(() => {setArray(temp_array)}, 600);
+        //     setPreSize(size);
+        // }     else {
         setArray(temp_array);
-        root.style.setProperty("--number-of-bars", size) 
+        // } 
+      
+        
     }
     
     // var appendToArray = function(v){
@@ -52,7 +63,18 @@ function BubbleSort(props){
         });
     }
 
-  
+    async function swap(i,j){  
+        let temp = array.slice();
+        let tmpvar = temp[i]
+        temp[i] = temp[j]
+        temp[j] = tmpvar
+        setArray(temp)
+    }
+
+    const Algorithm = () => {
+        // console.log(MergeSortAlgorithm(array));
+        // setArray(MergeSortAlgorithm(array))
+    }
 
 
     return (
@@ -61,7 +83,7 @@ function BubbleSort(props){
             <div className={classes.selectbar}>
                 <div className={classes.innerselectbar}>
                     <div className={[classes.selectellement]}>
-                        <button className={classes.btn}>
+                        <button className={classes.btn} onClick={Algorithm}>
                             Start Sort
                         </button>
                     </div>
@@ -73,7 +95,7 @@ function BubbleSort(props){
                     <div className={classes.selectellement}>
                         <div className={classes.slidercontainer}>
                             Size
-                            <input id="size"type="range" min="5" max="100" step={1} className={classes.slider}/>
+                            <input id="size"type="range" min="10" max="200" step={1} className={classes.slider}/>
                         </div>
                     </div>
                     <div className={classes.selectellement}>
