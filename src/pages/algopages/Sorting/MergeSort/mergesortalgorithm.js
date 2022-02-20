@@ -1,37 +1,18 @@
-
-export default function getAnimationsMergeSort(array){
-    
+export function getAnimationBubbleSort(array){
+    let animations = [];
+    doBubbleSort(array,animations)
+    return [animations,array]
 }
 
-function MergeSortAlgorithm(array){
-    if( array.length === 1){
-        return array
-    }
-    const middle = Math.floor(array.length/2);
-    const left =  MergeSortAlgorithm(array.slice(0,middle));
-    const right = MergeSortAlgorithm(array.slice(middle));
-
-    return merge(left,right)
-}
-
-const merge = (left,right) => {
-    const sortedArray = []
-    let i = 0, j = 0;
-
-    while((i<left.length) && (j<right.length)){
-        if(left[i] < right[j]){
-            sortedArray.push(left[i]);
-            i++;
-        } else {
-            sortedArray.push(right[j]);
-            j++;
+function doBubbleSort(array,animations){
+    const n = array.length;
+    for(let i = 0;i<n;i++){
+        for(let j = 0;j<n-1-i;j++){
+            animations.push({animation:[j,j+1],state:"compare"})
+            if(array[j+1] < array[j]){
+                [array[j+1], array[j]] = [array[j],array[j+1]]
+                animations.push({animation:[j+1,j],state:"swap"})
+            }
         }
     }
-    while(i<left.length){
-        sortedArray.push(left[i++]);
-    }
-    while(j<right.length){
-        sortedArray.push(right[j++]);
-    }
-    return sortedArray;
 }

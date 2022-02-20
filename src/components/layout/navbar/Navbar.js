@@ -4,7 +4,7 @@ import classes from "./Navbar.module.css"
 
 // import DartSvg from "../../svg/DartSvg"
 
-import { useState } from "react";
+import { useEffect } from "react";
 
 import { Link } from "react-router-dom"
 
@@ -12,7 +12,7 @@ function Navbar(props) {
 
   let root = document.querySelector(':root');
   
-  const [currentLocation, setCurrenLocation] = useState(window.location.pathname);
+  // const [currentLocation, setCurrenLocation] = useState(window.location.pathname);
   
   const animationMultiplier = 1.5;
 
@@ -20,7 +20,7 @@ function Navbar(props) {
   const handleScoll = function(){
     var currentLocation = window.location.pathname;
     console.log(currentLocation)
-    if(currentLocation === "/" || currentLocation === "/home"){
+    if(currentLocation === "/"){
       var offset = window.pageYOffset || document.documentElement.scrollTop
       if(offset > 88 * animationMultiplier){
         offset = 88 * animationMultiplier;
@@ -54,7 +54,7 @@ function Navbar(props) {
   //   }, 500);
   // }
 
-  const handelFirstScroll = function(e){
+  // const handelFirstScroll = function(e){
 
     // var offset = window.pageYOffset || document.documentElement.scrollTop
     // if(offset < 90* animationMultiplier){
@@ -70,13 +70,16 @@ function Navbar(props) {
     //   scrollSmoothTo(offset + (e.wheelDeltaY * -animationMultiplier))
     //   console.log(3)
     // }
-  }
+  // }
     
-  window.addEventListener("scroll",handleScoll);
-  window.addEventListener("wheel", (e) => handelFirstScroll(e), {passive: false});
+ 
 
 
-
+  useEffect(() => {
+    handleScoll()
+    window.addEventListener("scroll",handleScoll);
+    // window.addEventListener("wheel", (e) => handelFirstScroll(e), {passive: false});
+  },[]);
   
   
   return (

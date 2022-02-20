@@ -18,10 +18,10 @@ function Sorting(props) {
             </Link>
         </div>
         <div className={classes.card}>
-            <Link to="/home/heapsort">
+            <Link to="/home/insertionsort">
                 <Card>
                 <div className={classes.cardtitle}>
-                    Heap Sort
+                    Insertion Sort
                 </div>
                 </Card>
             </Link>

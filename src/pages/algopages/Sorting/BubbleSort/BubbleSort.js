@@ -9,25 +9,41 @@ function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  const MAX_BAR_LENGTH = 500;
-  const MAX_SPEED = 1000;
+const MAX_BAR_LENGTH = 500;
+const MAX_SPEED = 1000;
 
+function disableInputs(){
+    Array.from(document.getElementsByTagName('button')).forEach((e) => {
+        e.disabled = true;
+    });
+    Array.from(document.getElementsByTagName('input')).forEach((e) => {
+        e.disabled = true;
+    });
+}
+function enableInputs(){
+    Array.from(document.getElementsByTagName('button')).forEach((e) => {
+        e.disabled = false;
+    });
+    Array.from(document.getElementsByTagName('input')).forEach((e) => {
+        e.disabled = false;
+    });
+}
 
 function BubbleSort(props){
-    window.scrollTo({
-        top: 88,
-        behavior: "smooth"
-    })
+    // window.scrollTo({
+    //     top: 88,
+    //     behavior: "smooth"
+    // })
 
     const [array, setArray] = useState([])
     const [size, setSize] = useState(50);
-    // const [pre_size, setPreSize] = useState(size);
     const [speed, setSpeed] = useState(10);
+
 
     const root = document.querySelector(':root');
     const animation_color = window.getComputedStyle(document.documentElement).getPropertyValue("--animation-color")
     const standard_color = window.getComputedStyle(document.documentElement).getPropertyValue("--firstColor")
-    // let array = []
+
 
     var resetArray = function() {
         const temp_array = [];
@@ -35,16 +51,9 @@ function BubbleSort(props){
           temp_array.push(randomIntFromInterval(5, MAX_BAR_LENGTH));
         }
         root.style.setProperty("--number-of-bars", size);
-        // let zeros = Array.apply(null, {length: size}).fill(5);
-        // if(pre_size < size){
-        //     setArray(zeros)
-        //     setTimeout(() => {setArray(temp_array)}, 600);
-        //     setPreSize(size);
-        // }     else {
         setArray(temp_array);
-        // } 
-      
-        
+
+        document.getElementById("counter").innerHTML = 0;
     }
     
     // var appendToArray = function(v){
@@ -78,38 +87,61 @@ function BubbleSort(props){
 
 
     async function doAnimations(){
+        disableInputs();
+
+        const counter = document.getElementById("counter");
+
         root.style.setProperty("--animation-duration","0.1s");
     
         const [animations , temp_array] = getAnimationBubbleSort(array.slice())
         let n = animations.length;
-        const duration = (MAX_SPEED+ 1) / (speed * 3)
+        const duration = (MAX_SPEED+1) / (speed * 3)
+
+        let count;
+        counter.innerHTML = 0;
         for(let i = 0;i<n;i++){
             const bars = document.getElementsByClassName(classes.arraybar)
             
             let firstBar = bars[animations[i].animation[0]].style;
             let secondBar = bars[animations[i].animation[1]].style;
-            if(animations[i].state === 1){   
+
+            count = 0;
+                       
+            if(animations[i].state === "swap"){ 
+
                 setTimeout(() => {
+                    count++;
+                    counter.innerHTML = count;
                     let temp = firstBar.height;
                     firstBar.height = secondBar.height;
                     secondBar.height = temp;
                     
                 }, i * duration);
-            } 
-            else if(duration > 2){
-                console.log(duration)
+
+            } else if(animations[i].state === "compare"){
                 setTimeout(() => {
-                    firstBar.backgroundColor = animation_color;
-                    secondBar.backgroundColor = animation_color;
-                    setTimeout(() => {
-                        firstBar.backgroundColor = standard_color;
-                        secondBar.backgroundColor = standard_color;
-                    }, duration)
+                    count++;
+                    counter.innerHTML = count;
+                    if(duration > 2) {
+                        firstBar.backgroundColor = animation_color;
+                        secondBar.backgroundColor = animation_color;
+                        setTimeout(() => {
+                            firstBar.backgroundColor = standard_color;
+                            secondBar.backgroundColor = standard_color;
+                        }, duration);
+                    }   
                 }, i * duration);
+
+                
             }
         }
 
-        setTimeout(()=>{root.style.setProperty("--animation-duration","0.5s")},n*duration);
+        setTimeout(()=>{ // after sort
+            root.style.setProperty("--animation-duration","0.5s")
+            setArray(temp_array);
+
+            enableInputs();
+        },n*duration);
     }
 
     return (
@@ -150,6 +182,10 @@ function BubbleSort(props){
                         height: `${value}px`,
                     }}></div>
                 ))}
+            </div>
+            <div className={classes.count}>
+                    Actions: 
+                    <div id="counter">0</div>
             </div>
         </div>
     );

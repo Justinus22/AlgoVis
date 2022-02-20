@@ -4,13 +4,15 @@
     --innerselectbar-height: 5vH;
 
     --number-of-bars: 50;
+
+    --animation-duration: 0.5s;
 }
 
 .outer{
     height: calc(100vH - var(--navbar-end-height));
     width: 100%;
     display: grid;
-    grid-template-rows: 15vH 15vH 50vH;
+    grid-template-rows: 10vH 15vH 500px 8vH;
     justify-items: center;
     /* grid-row-gap: 10vH; */
 }
@@ -135,13 +137,14 @@
 
 /* Sort */
 .sortdiv{
-    margin-top: 10vH;
+    /* margin-top: 10vH; */
 
     position:relative;
-    width: 70%;
+    width: 80%;
+    height: 500px;
     
     display: grid;
-    grid-template-columns: repeat(var(--number-of-bars), minmax(1px,1fr));
+    grid-template-columns: repeat(var(--number-of-bars), minmax(2px,1fr));
     /* grid-auto-rows: auto; */
     /* grid-gap: 0.5rem; */
     align-items: var(--sorting-bar-align);
@@ -149,8 +152,30 @@
 }
 .arraybar{
     margin: 0;
-    width: min(20px,calc(3px * (500/var(--number-of-bars))));
+    width: min(20px,calc(3px * (200/var(--number-of-bars))));
     background-color: var(--firstColor);
     border-radius: 20px;
-    transition: height 0.5s;
+    transition: height var(--animation-duration);
+}
+
+.count{
+    position: relative;
+    margin: 0;
+    margin-top: 2vH;
+    height: min-content;
+    padding: 1vW;
+    display: grid;
+    grid-template-columns: repeat(2 ,1fr);
+
+    /* justify-content: center;
+    align-items: center; */
+
+    
+    font-size: 2rem;
+    text-align: center;
+
+    background-color: var(--firstColor);
+    color: var(--secondColor);
+    border-radius: 10px;
+    
 }

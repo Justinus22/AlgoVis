@@ -1,7 +1,7 @@
 import { Route , Switch} from 'react-router-dom'
 
 import BubbleSort from './Sorting/BubbleSort/BubbleSort.js';
-import HeapSort from "./Sorting/HeapSort/HeapSort.js";
+import InsertionSort from "./Sorting/InsertionSort/InsertionSort.js";
 import MergeSort from "./Sorting/MergeSort/MergeSort.js";
 import QuickSort from "./Sorting/QuickSort/QuickSort.js";
 
@@ -12,8 +12,8 @@ function RouteManager() {
         <Route path={["/home/bubblesort"]} exact> 
             <BubbleSort />
         </Route>
-        <Route path={["/home/heapsort"]} exact> 
-            <HeapSort />
+        <Route path={["/home/insertionsort"]} exact> 
+            <InsertionSort />
         </Route>
         <Route path={["/home/mergesort"]} exact> 
             <MergeSort />
