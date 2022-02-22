@@ -1,6 +1,6 @@
 import classes from "./QuickSort.module.css"
 
-import { getAnimationBubbleSort } from "./quicksortalgorithm";
+import { getAnimationQuickSort } from "./quicksortalgorithm";
 
 import { useState, useEffect } from "react"
 
@@ -93,9 +93,10 @@ function BubbleSort(props){
 
         root.style.setProperty("--animation-duration","0.1s");
     
-        const [animations , temp_array] = getAnimationBubbleSort(array.slice())
+        const [animations , temp_array] = getAnimationQuickSort(array.slice())
         let n = animations.length;
         const duration = (MAX_SPEED+1) / (speed * 3)
+
 
         let count;
         counter.innerHTML = 0;
@@ -146,7 +147,7 @@ function BubbleSort(props){
 
     return (
         <div className={classes.outer}>
-            <p className={classes.title}>Bubble Sort</p>
+            <p className={classes.title}>Quick Sort</p>
             <div className={classes.selectbar}>
                 <div className={classes.innerselectbar}>
                     <div className={[classes.selectellement]}>
