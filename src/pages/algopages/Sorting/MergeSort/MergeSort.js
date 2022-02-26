@@ -1,6 +1,6 @@
 import classes from "./MergeSort.module.css"
 
-import { getAnimationBubbleSort } from "./mergesortalgorithm";
+import { getAnimationMergeSort } from "./mergesortalgorithm";
 
 import { useState, useEffect } from "react"
 
@@ -93,7 +93,7 @@ function BubbleSort(props){
 
         root.style.setProperty("--animation-duration","0.1s");
     
-        const [animations , temp_array] = getAnimationBubbleSort(array.slice())
+        const [animations , temp_array] = getAnimationMergeSort(array.slice())
         let n = animations.length;
         const duration = (MAX_SPEED+1) / (speed * 3)
 
@@ -101,20 +101,19 @@ function BubbleSort(props){
         counter.innerHTML = 0;
         for(let i = 0;i<n;i++){
             const bars = document.getElementsByClassName(classes.arraybar)
-            
+
             let firstBar = bars[animations[i].animation[0]].style;
             let secondBar = bars[animations[i].animation[1]].style;
+            let value = `${animations[i].value}px`
 
             count = 0;
                        
-            if(animations[i].state === "swap"){ 
+            if(animations[i].state === "set"){ 
 
                 setTimeout(() => {
                     count++;
                     counter.innerHTML = count;
-                    let temp = firstBar.height;
-                    firstBar.height = secondBar.height;
-                    secondBar.height = temp;
+                    firstBar.height = value;
                     
                 }, i * duration);
 
