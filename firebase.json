@@ -2,7 +2,8 @@
   "database": {
     "rules": "database.rules.json"
   },
-  "hosting": {
+  "hosting": [{
+    "site": "algovis",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -15,5 +16,19 @@
         "destination": "/index.html"
       }
     ]
-  }
+  },{
+    "site": "algorithmvisualisation",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }]
 }

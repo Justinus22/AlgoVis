@@ -4,7 +4,7 @@ import Layout from "./components/layout/Layout"
 
 import AllAlgorithmOverview from "./pages/Overview/AllAlgorithmOverview"
 import WebsiteDetails from "./pages/WebsiteDetails"
-import Account from "./pages/Account"
+import Account from "./pages/Account/Account.js"
 
 import RouteManager from './pages/algopages/RouteManager'
 

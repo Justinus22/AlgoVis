@@ -6,6 +6,8 @@
   --nav-visibility: 0;
   --nav-size: 0vW; 
   /* goes to 15vW */
+
+  --logo-animation-display-mode: grid;
 }
 .nav {
   position: fixed;
@@ -14,6 +16,10 @@
   z-index: 100;
   top: 0;
   left: 0;
+
+  display: grid;
+  justify-content: center;
+  grid-auto-rows: 0.8fr 1.2fr;
 
   background-color: var(--thirdColor);
 }
@@ -29,11 +35,17 @@
 }
 .titlelink{
   font-size: var(--title-size);
+
+  display: flex;
+  align-items: center;
 }
+
+
 .nav ul {
   position: relative;
   list-style: none;
   margin: 0;
+  padding: 0;
   padding-top: var(--ul-padding);
   
 
@@ -76,6 +88,42 @@
   opacity: var(--nav-visibility);
   width: var(--nav-size);
   text-align: center;
+}
+
+
+.logoanimationdiv{
+  position: relative;
+  margin: 0;
+  padding-top: 5vh;
+
+  display: var(--logo-animation-display-mode);
+  justify-items: center;
+  grid-auto-rows: 100px;
+}
+.firstdart,
+.seconddart{
+  position: relative;
+  margin: 0;
+}
+
+.firstdart{
+  animation: dart 1.5s ease 0s infinite;
+}
+
+.seconddart{
+  animation: dart 1.5s ease 0.2s infinite;
+}
+
+@keyframes dart {
+  0%{
+    top: 0;
+  }
+  50%{
+    top: 30px;
+  }
+  100%{
+    top: 0;
+  }
 }
 
 
