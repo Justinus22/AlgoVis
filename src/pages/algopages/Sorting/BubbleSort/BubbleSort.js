@@ -12,7 +12,7 @@ function randomIntFromInterval(min, max) {
 const MAX_BAR_LENGTH = 500;
 const MAX_SPEED = 1000;
 
-function disableInputs(){
+function disableInputs(){ 
     Array.from(document.getElementsByTagName('button')).forEach((e) => {
         e.disabled = true;
     });

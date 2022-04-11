@@ -3,11 +3,18 @@ import classes from "./Navbar.module.css"
 import LogoDoubleDart from "../../svg/LogoDoubleDart.js"
 import LogoSingleDart from "../../svg/LogoSingleDart.js"
 
-import { useEffect, useState } from "react";
+import { AuthContext } from "../../../contexts/Auth";
+
+import { useEffect, useState, useContext } from "react";
 
 import { Link } from "react-router-dom"
 
 function Navbar(props) {
+
+  const {currentUser} = useContext(AuthContext);
+
+
+
 
   let root = document.querySelector(':root');
   
@@ -22,9 +29,7 @@ function Navbar(props) {
 
     if(offset > 88 * animationMultiplier ){
       offset = 88 * animationMultiplier;
-      setLogoState(true);
-    } else if(currentLocation === "/") {
-      setLogoState(false);
+      
     }
 
     if(currentLocation === "/"){
@@ -32,9 +37,11 @@ function Navbar(props) {
       root.style.setProperty("--title-size", 112 - (offset/animationMultiplier) + "px")
 
       if(offset >= 85 * animationMultiplier){
-          root.style.setProperty("--nav-visibility", "1");       
+          root.style.setProperty("--nav-visibility", "1");  
+          setLogoState(true);     
       }else{
-        root.style.setProperty("--nav-visibility", "0"); 
+        root.style.setProperty("--nav-visibility", "0");
+        setLogoState(false);
       }
 
       if( offset >= 75 * animationMultiplier){
@@ -45,8 +52,10 @@ function Navbar(props) {
 
       if (offset >= 55 * animationMultiplier){
         root.style.setProperty("--logo-animation-display-mode", "none")
+        
       } else {
         root.style.setProperty("--logo-animation-display-mode", "grid")
+        
       }
 
     } else {
@@ -64,8 +73,6 @@ function Navbar(props) {
     handleScoll()
     window.addEventListener("scroll",handleScoll);
   },[]);
-  
-  console.log(logoState)
   
   return (
   <header className={classes.nav}>
@@ -88,10 +95,10 @@ function Navbar(props) {
            </Link>
         </li>
         <li className={classes.navel}>
-            <Link to="/Account" className={classes.accountlink}> Account </Link>
+            <Link to="/account" className={classes.accountlink}> Account </Link>
         </li>
         <li className={classes.navel}>
-            <Link to="/WebsiteDetails" className={classes.detailslink}> Website Details </Link>
+            <Link to="/websiteDetails" className={classes.detailslink}> Website Details </Link>
         </li>
     </ul>
     <div className={classes.logoanimationdiv}>

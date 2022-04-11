@@ -6,25 +6,29 @@ import AllAlgorithmOverview from "./pages/Overview/AllAlgorithmOverview"
 import WebsiteDetails from "./pages/WebsiteDetails"
 import Account from "./pages/Account/Account.js"
 
-import RouteManager from './pages/algopages/RouteManager'
+import RouteManager from './components/RouteManager'
+
+import ContextProvider from "./contexts/ContextProvider.js"
 
 function App() {
 
   return (
-      <Layout>
-        <RouteManager />
-        <Switch>
-          <Route path={['/','/home']} exact> 
-            <AllAlgorithmOverview />
-          </Route>
-          <Route path='/WebsiteDetails' exact>
-            <WebsiteDetails />
-          </Route>
-          <Route path='/Account' exact>
-            <Account />
-          </Route>
-        </Switch>
-      </Layout>
+      <ContextProvider>
+        <Layout>
+          <RouteManager />
+          <Switch>
+            <Route path={['/','/home']} exact> 
+              <AllAlgorithmOverview />
+            </Route>
+            <Route path='/websitedetails' exact>
+              <WebsiteDetails />
+            </Route>
+            <Route path='/account' exact>
+              <Account />
+            </Route>
+          </Switch>
+        </Layout>
+      </ContextProvider>
   );
 }
 

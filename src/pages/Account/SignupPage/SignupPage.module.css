@@ -10,7 +10,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    row-gap: 10vH;
+    row-gap: 15vH;
 
     grid-template-columns: 70%;
 }
@@ -23,28 +23,12 @@
     text-align: center;
     
 }
-.signuplink{
-    color: var(--secondColor);
-    background-color: var(--firstColor);
-    text-decoration: none;
-    font-size: 1.5rem;
-
-    border-radius: 10px;
-    padding: 1%;
-
-    transition: 0.2s;
-}
-.signuplink:hover{
-    color: var(--firstColor);
-    background-color: var(--secondColor);
-}
-
 .form{
     display: grid;
     align-items: center;
 
 
-    row-gap: 5vH;
+    row-gap: 8vH;
 }
 .label{
     color: var(--secondColor);

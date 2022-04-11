@@ -4,46 +4,53 @@ import { Link } from "react-router-dom"
 
 import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
+import { AuthContext } from "../../../contexts/Auth.js";
+
 import app from "../../../firebase/initfirebase";
-// import { AuthContext } from "../../context/Auth";
 
 
+function LoginPage(props){
 
+  const user = useContext(AuthContext);
 
-function LoginPage(props, {history}){
+  const handleLogin = async event => {
+        
+        event.preventDefault();
+        const { email, password } = event.target.elements;
+          await app
+            .auth()
+            .signInWithEmailAndPassword(email.value, password.value)
+            // .then((userCredential) => {
+            //   console.log(userCredential.user)
+            // })
+            .catch((error) => {
+              alert(error.message);
+            });
+    }
 
-    const handleLogin = useCallback(
-        async event => {
-          event.preventDefault();
-          const { email, password } = event.target.elements;
-          try {
-            await app
-              .auth()
-              .signInWithEmailAndPassword(email.value, password.value);
-            history.push("/");
-          } catch (error) {
-            alert('Worng User Name or Password');
-          }
-        },
-        [history]
+    if(user.currentUser){
+      return (
+        <Redirect to="/account" />
       );
+    }
 
     return (
         <div className={classes.outer}>
             <div className={classes.title}>
                 Log In
             </div>
-                <form onSubmit={handleLogin}>
-                    <label>
-                    Email
-                    <input name="email" type="email" placeholder="Email" />
+            <form onSubmit={handleLogin} className={classes.form}>
+                <label className={classes.label}>
+                  <input  name="email" type="email" placeholder="Email" className={classes.input}/>
                 </label>
-                <label>
-                    Password
-                    <input name="password" type="password" placeholder="Password" />
+                <label className={classes.label}>
+                  <input name="password" type="password" placeholder="Password" className={classes.input}/>
                 </label>
-                <button type="submit">Log in</button>
+                <button type="submit" className={classes.btn}>Log in</button>
             </form>
+            <div>
+              <Link to="/account/signup" className={classes.signuplink}> Sign Up Page</Link>
+            </div>
         </div>
     );
 }
