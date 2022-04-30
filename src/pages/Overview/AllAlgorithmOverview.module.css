@@ -2,16 +2,22 @@
   /* display: flex;
   justify-content: center; */
   position: relative;
-  height: 100vh;
+  /* height: 100vh; */
+
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 70%;
+  grid-row-gap: 10vH;
 
   background-size: cover;
   background-color: var(--secondColor);
 
-  top: 15vH
+  /* top: 25vH */
  
 }
 
-.chapter{
+/* .chapter{
   width: 70%;
   margin: auto;
-}
+} */

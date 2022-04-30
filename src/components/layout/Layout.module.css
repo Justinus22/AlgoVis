@@ -1,4 +1,5 @@
 .content{
     position: relative;
     top: var(--navbar-end-height);
+    transition: 1s;
 } 

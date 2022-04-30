@@ -85,7 +85,6 @@ function BubbleSort(props){
         })
     }
 
-
     async function doAnimations(){
         disableInputs();
 

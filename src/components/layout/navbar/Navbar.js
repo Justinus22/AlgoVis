@@ -35,6 +35,7 @@ function Navbar(props) {
     if(currentLocation === "/"){
       root.style.setProperty("--navbar-start-height", (100 - (offset/animationMultiplier)) + "vH");
       root.style.setProperty("--title-size", 112 - (offset/animationMultiplier) + "px")
+      root.style.setProperty("--navbar-end-height", "50vH");
 
       if(offset >= 85 * animationMultiplier){
           root.style.setProperty("--nav-visibility", "1");  
@@ -64,6 +65,7 @@ function Navbar(props) {
       root.style.setProperty("--nav-size", "15vW");
       root.style.setProperty("--nav-visibility", "1");
       root.style.setProperty("--logo-animation-display-mode", "none")
+      root.style.setProperty("--navbar-end-height", "25vH");
     }
 
   }

@@ -7,6 +7,7 @@ import { withRouter, Redirect } from "react-router";
 import { AuthContext } from "../../../contexts/Auth.js";
 
 import app from "../../../firebase/initfirebase";
+import { getDatabase, ref, set} from "firebase/database";
 
 
 function LoginPage(props){
@@ -14,18 +15,18 @@ function LoginPage(props){
   const user = useContext(AuthContext);
 
   const handleLogin = async event => {
-        
-        event.preventDefault();
-        const { email, password } = event.target.elements;
-          await app
-            .auth()
-            .signInWithEmailAndPassword(email.value, password.value)
-            // .then((userCredential) => {
-            //   console.log(userCredential.user)
-            // })
-            .catch((error) => {
-              alert(error.message);
-            });
+    
+    event.preventDefault();
+    const { email, password } = event.target.elements;
+      await app
+        .auth()
+        .signInWithEmailAndPassword(email.value, password.value)
+        // .then((userCredential) => {
+        //   console.log(userCredential.user)
+        // })
+        .catch((error) => {
+          alert(error.message);
+        });
     }
 
     if(user.currentUser){

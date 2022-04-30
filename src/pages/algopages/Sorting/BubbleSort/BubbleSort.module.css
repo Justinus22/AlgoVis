@@ -1,7 +1,7 @@
 :root{
     --border-radius: 30px;
     --selectbar-height: 12vH;
-    --innerselectbar-height: 5vH;
+    --innerselectbar-height: 5vH; 
 
     --number-of-bars: 50;
 

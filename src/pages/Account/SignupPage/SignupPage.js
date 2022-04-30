@@ -1,6 +1,7 @@
 import classes from "./SignupPage.module.css"
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set} from "firebase/database";
 
 import { useContext } from "react";
 import { Redirect } from "react-router-dom";
@@ -12,20 +13,29 @@ function SignupPage(props){
 
     const user = useContext(AuthContext);
 
+    const db = getDatabase();
+    
+
     const handleSignUp = async event => {
         event.preventDefault();
 
-        const { email, password } = event.target.elements;
+        const { email, password, name } = event.target.elements;
 
-
-        app.auth().createUserWithEmailAndPassword(email.value, password.value)
-        // .then((userCredential) => {
-        //     props.history.replace({ pathname: "/account"})
-        //     console.log("changed")
-        // })
-        .catch((error) => {
-            alert(error.message);
-        })
+        if(name.value == ""){
+            alert("Please enter a name.")
+        } else {
+            app.auth().createUserWithEmailAndPassword(email.value, password.value)
+            .then((userCredential) => {
+                set(ref(db, 'users/' + userCredential.user.uid), {
+                    username: name.value,
+                    uId: userCredential.user.uid,
+                    email: userCredential.user.email
+                });
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+        }
     }
  
     if(user.currentUser){
@@ -41,6 +51,9 @@ function SignupPage(props){
         </div>
         <form onSubmit={handleSignUp} className={classes.form}>
             <label>
+                <input name="name" type="text" placeholder="Name" className={classes.input}/>
+            </label>
+            <label>
                 <input name="email" type="email" placeholder="Email" className={classes.input}/>
             </label>
             <label>
@@ -53,3 +66,4 @@ function SignupPage(props){
 }
 
 export default SignupPage;
+

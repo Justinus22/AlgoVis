@@ -1,6 +1,8 @@
 import Searching from "./Searching/Searching.js"
 import Sorting from "./Sorting/Sorting.js"
 
+import IntroText from "./IntroText/IntroText.js";
+
 import classes from "./AllAlgorithmOverview.module.css"
 
 
@@ -20,21 +22,20 @@ function AllAlgorithmOverview(props) {
 
   return (
     <div className={classes.page}>
-      <div className={classes.chapter}>
-        <Sorting />
-      </div>
-      <div className={classes.chapter}>
-        <Sorting />
-      </div>
-      <div className={classes.chapter}>
-        <Searching />
-      </div>
-      <div className={classes.chapter}>
-        <Searching />
-      </div>
- 
+      <IntroText />
 
- 
+      <div className={classes.chapter}>
+        <Sorting />
+      </div>
+      <div className={classes.chapter}>
+        <Sorting />
+      </div>
+      {/* <div className={classes.chapter}>
+        <Searching />
+      </div>
+      <div className={classes.chapter}>
+        <Searching />
+      </div> */}
     </div>
   );
 }

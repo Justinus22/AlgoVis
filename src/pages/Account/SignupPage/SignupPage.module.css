@@ -10,7 +10,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    row-gap: 15vH;
+    row-gap: 5vH;
 
     grid-template-columns: 70%;
 }

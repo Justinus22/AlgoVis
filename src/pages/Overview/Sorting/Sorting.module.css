@@ -1,7 +1,11 @@
 .outer{
 	position: relative;
 	width: 100%;
-	margin-top: 10vH;	
+
+	/* border-radius: 10px;
+	border-color: var(--firstColor);
+	border-style: solid;
+	padding: 3vH; */
 }
 
 .select{

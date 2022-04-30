@@ -17,6 +17,8 @@
   top: 0;
   left: 0;
 
+  margin-bottom: var(--site-offset);
+
   display: grid;
   justify-content: center;
   grid-auto-rows: 0.8fr 1.2fr;
