@@ -14,11 +14,11 @@ function Navbar(props) {
   const {currentUser} = useContext(AuthContext);
 
 
-
+  let isMobile;
 
   let root = document.querySelector(':root');
   
-  const animationMultiplier = 1.5;
+  const ANIMATIONMULTIPLIER = 1.5;
 
   const [logoState, setLogoState] = useState(true)
 
@@ -27,17 +27,17 @@ function Navbar(props) {
     var currentLocation = window.location.pathname;
     var offset = window.pageYOffset || document.documentElement.scrollTop
 
-    if(offset > 88 * animationMultiplier ){
-      offset = 88 * animationMultiplier;
+    if(offset > 88 * ANIMATIONMULTIPLIER ){
+      offset = 88 * ANIMATIONMULTIPLIER;
       
     }
 
-    if(currentLocation === "/"){
-      root.style.setProperty("--navbar-start-height", (100 - (offset/animationMultiplier)) + "vH");
-      root.style.setProperty("--title-size", 112 - (offset/animationMultiplier) + "px")
+    if(currentLocation === "/" && !isMobile){
+      root.style.setProperty("--navbar-start-height", (100 - (offset/ANIMATIONMULTIPLIER)) + "vH");
+      root.style.setProperty("--title-size", 112 - (offset/ANIMATIONMULTIPLIER) + "px")
       root.style.setProperty("--navbar-end-height", "50vH");
 
-      if(offset >= 85 * animationMultiplier){
+      if(offset >= 85 * ANIMATIONMULTIPLIER){
           root.style.setProperty("--nav-visibility", "1");  
           setLogoState(true);     
       }else{
@@ -45,13 +45,13 @@ function Navbar(props) {
         setLogoState(false);
       }
 
-      if( offset >= 75 * animationMultiplier){
+      if( offset >= 75 * ANIMATIONMULTIPLIER){
         root.style.setProperty("--nav-size", "15vW"); 
       } else {
         root.style.setProperty("--nav-size", "0vW"); 
       }
 
-      if (offset >= 55 * animationMultiplier){
+      if (offset >= 55 * ANIMATIONMULTIPLIER){
         root.style.setProperty("--logo-animation-display-mode", "none")
         
       } else {
@@ -65,13 +65,14 @@ function Navbar(props) {
       root.style.setProperty("--nav-size", "15vW");
       root.style.setProperty("--nav-visibility", "1");
       root.style.setProperty("--logo-animation-display-mode", "none")
-      root.style.setProperty("--navbar-end-height", "25vH");
+      root.style.setProperty("--navbar-end-height", "15vH");
     }
 
   }
 
    
   useEffect(() => {
+    isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     handleScoll()
     window.addEventListener("scroll",handleScoll);
   },[]);

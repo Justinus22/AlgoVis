@@ -1,4 +1,4 @@
-import classes from "./BubbleSort.module.css"
+import classes from "../SortingStyle.module.css"
 
 import { getAnimationBubbleSort } from "./bubblesortalgorithm";
 

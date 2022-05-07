@@ -1,4 +1,4 @@
-import classes from "./InsertionSort.module.css"
+import classes from "../SortingStyle.module.css"
 
 import { getAnimationInsertionSort } from "./insertionsortalgorithm";
 
@@ -8,7 +8,7 @@ function randomIntFromInterval(min, max) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-
+ 
 const MAX_BAR_LENGTH = 500;
 const MAX_SPEED = 1000;
 

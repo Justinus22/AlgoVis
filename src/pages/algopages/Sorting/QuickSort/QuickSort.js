@@ -1,4 +1,4 @@
-import classes from "./QuickSort.module.css"
+import classes from "../SortingStyle.module.css"
 
 import { getAnimationQuickSort } from "./quicksortalgorithm";
 
@@ -11,7 +11,7 @@ function randomIntFromInterval(min, max) {
 
 const MAX_BAR_LENGTH = 500;
 const MAX_SPEED = 1000;
-
+ 
 function disableInputs(){
     Array.from(document.getElementsByTagName('button')).forEach((e) => {
         e.disabled = true;

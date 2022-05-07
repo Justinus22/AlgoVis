@@ -9,10 +9,10 @@
 }
 
 .outer{
-    height: calc(100vH - var(--navbar-end-height));
+    /* height: calc(100vH - var(--navbar-end-height)); */
     width: 100%;
     display: grid;
-    grid-template-rows: 10vH 15vH 500px 8vH;
+    grid-template-rows: 10vH 15vH 500px 8vH; 
     justify-items: center;
     /* grid-row-gap: 10vH; */
 }

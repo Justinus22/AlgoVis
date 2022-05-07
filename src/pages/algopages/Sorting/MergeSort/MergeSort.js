@@ -1,5 +1,4 @@
-import classes from "./MergeSort.module.css"
-
+import classes from "../SortingStyle.module.css"
 import { getAnimationMergeSort } from "./mergesortalgorithm";
 
 import { useState, useEffect } from "react"
@@ -14,7 +13,7 @@ const MAX_SPEED = 1000;
 
 function disableInputs(){
     Array.from(document.getElementsByTagName('button')).forEach((e) => {
-        e.disabled = true;
+        e.disabled = true; 
     });
     Array.from(document.getElementsByTagName('input')).forEach((e) => {
         e.disabled = true;
