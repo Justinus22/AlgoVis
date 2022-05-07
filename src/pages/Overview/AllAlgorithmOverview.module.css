@@ -7,10 +7,9 @@
   display: grid;
   align-items: center;
   justify-content: center;
-  grid-template-columns: 70%;
+  grid-template-columns: minmax(0,70vW);
   grid-row-gap: 10vH;
 
-  background-size: cover;
   background-color: var(--secondColor);
 
   /* top: 25vH */
@@ -21,3 +20,7 @@
   width: 70%;
   margin: auto;
 } */
+
+@media screen and (max-width: 500px){
+  
+}

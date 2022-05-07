@@ -7,7 +7,7 @@ function IntroText(){
                 Welcome 
                 <div className={classes.innertitle}>
                     to AlgoVis
-                </div> 
+                </div>  
             </div>
             <p className={classes.text}>
                 Lorem ipsum dolor sit amet, 

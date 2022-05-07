@@ -23,8 +23,6 @@ code {
   --secondColor: white;
   --thirdColor: var(--firstColor);
   --hoverColor:  #bdeaff;
-  --navbar-start-height: 100vH;
-  --navbar-end-height: 50vH;
   --first-headline-size: 4rem;
   --normal-text-font-size: 1.6rem;
 

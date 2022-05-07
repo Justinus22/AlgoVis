@@ -20,7 +20,16 @@ function Navbar(props) {
   
   const ANIMATIONMULTIPLIER = 1.5;
 
-  const [logoState, setLogoState] = useState(true)
+  const NAVBARSTARTHEIGHT = 12; // final height of navbar in vH
+  const NAVBARSTARTHEIGHTHELPER = 100;// startheight of the navbar at page open in vH
+  const TITLESIZEHELPER = 112; // 112px is startheight of titleat page open
+
+  const NAVBARENDHEIGHT_START = 50 + "vH"; // Offset of Page during start animation
+  const NAVBARENDHEIGHT_END = 15 + "vH"; // Offset of Page after start animation
+
+  const NAVELWIDTH = 15 + "vW"; // final width of the nav elements
+
+  const [logoState, setLogoState] = useState(true) // if logo should be displayed in title or not
 
 
   const handleScoll = function(){
@@ -33,9 +42,9 @@ function Navbar(props) {
     }
 
     if(currentLocation === "/" && !isMobile){
-      root.style.setProperty("--navbar-start-height", (100 - (offset/ANIMATIONMULTIPLIER)) + "vH");
-      root.style.setProperty("--title-size", 112 - (offset/ANIMATIONMULTIPLIER) + "px")
-      root.style.setProperty("--navbar-end-height", "50vH");
+      root.style.setProperty("--navbar-start-height", (NAVBARSTARTHEIGHTHELPER- (offset/ANIMATIONMULTIPLIER)) + "vH");
+      root.style.setProperty("--title-size", TITLESIZEHELPER - (offset/ANIMATIONMULTIPLIER) + "px")
+      root.style.setProperty("--navbar-end-height", NAVBARENDHEIGHT_START);
 
       if(offset >= 85 * ANIMATIONMULTIPLIER){
           root.style.setProperty("--nav-visibility", "1");  
@@ -46,9 +55,9 @@ function Navbar(props) {
       }
 
       if( offset >= 75 * ANIMATIONMULTIPLIER){
-        root.style.setProperty("--nav-size", "15vW"); 
+        root.style.setProperty("--navel-width", NAVELWIDTH); 
       } else {
-        root.style.setProperty("--nav-size", "0vW"); 
+        root.style.setProperty("--navel-width", "0vW"); 
       }
 
       if (offset >= 55 * ANIMATIONMULTIPLIER){
@@ -60,12 +69,12 @@ function Navbar(props) {
       }
 
     } else {
-      root.style.setProperty("--navbar-start-height", 12 + "vH");
+      root.style.setProperty("--navbar-start-height", NAVBARSTARTHEIGHT + "vH");
       root.style.setProperty("--title-size", 24 + "px");
-      root.style.setProperty("--nav-size", "15vW");
+      root.style.setProperty("--navel-width", NAVELWIDTH);
       root.style.setProperty("--nav-visibility", "1");
       root.style.setProperty("--logo-animation-display-mode", "none")
-      root.style.setProperty("--navbar-end-height", "15vH");
+      root.style.setProperty("--navbar-end-height", NAVBARENDHEIGHT_END);
     }
 
   }
