@@ -2,7 +2,7 @@
 	position: relative;
 	width: 100%;
 
-	/* border-radius: 10px;
+	/* border-radius: 10px; 
 	border-color: var(--firstColor);
 	border-style: solid;
 	padding: 3vH; */
@@ -28,10 +28,13 @@
 	color: var(--secondColor);
 	border-radius: 1rem;
 
+	display: grid;
+	align-items: center;
+
 	margin: auto;
+	padding: 1vW;
 	/* margin-top: 20rem;
 	margin-bottom: 3rem; */
-
 	text-align: center;
 	font-size: 3rem;
 }
@@ -62,10 +65,20 @@
 	font-size: 2rem;
 }
 
+@media screen and (max-width: 800px){
+	.title{
+		font-size:1.9rem;
+	}
+}
 
-
-
-
+@media screen and (max-width: 500px){
+	.title{
+		font-size: 1.5rem;
+	}
+	.cardtitle{
+		font-size: 1.5rem;
+	}
+}
 
 
 

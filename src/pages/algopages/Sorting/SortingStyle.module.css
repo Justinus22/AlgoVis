@@ -1,7 +1,6 @@
 :root{
     --border-radius: 30px;
-    --selectbar-height: 12vH;
-    --innerselectbar-height: 5vH;
+    --selectbar-height: fit-content;
 
     --number-of-bars: 50;
 
@@ -12,7 +11,7 @@
     /* height: calc(100vH - var(--navbar-end-height)); */
     width: 100%;
     display: grid;
-    grid-template-rows: 10vH 15vH 500px 8vH; 
+    grid-template-rows: 10vH fit-content 500px 8vH; 
     justify-items: center;
     /* grid-row-gap: 10vH; */
 }
@@ -25,27 +24,30 @@
 .selectbar{
     margin: auto;
     width: 80%;
+    min-width: 0;
     height: var(--selectbar-height);
+    max-height: 100%;
     background-color: var(--firstColor);
     color: var(--secondColor);
     border-radius: 30px;
 
+    padding: 20px;
+
     display: grid;
-    grid-template: 1fr;
     align-items: center;
 }
 .innerselectbar{
     position: relative;
     width: 100%;
-    /* height: var(--innerselectbar-height); */
-    /* left: var(--border-radius); */
     font-size: var(--normal-text-font-size);
 
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+    grid-template-columns: repeat(4, minmax(150px,1fr));
     justify-content: space-between;
     align-items: center;
+
+    transition: 1s;
 }
  
 .selectellement{
@@ -103,6 +105,8 @@
 
     display: grid;
     grid-template: 1fr;
+
+    margin: auto;
 
     font-size: var(--normal-text-font-size);
   }
@@ -163,7 +167,7 @@
     margin: 0;
     margin-top: 2vH;
     height: min-content;
-    padding: 1vW;
+    padding: 0.5rem;
     display: grid;
     grid-template-columns: repeat(2 ,1fr);
 
@@ -173,9 +177,26 @@
     
     font-size: 2rem;
     text-align: center;
+    justify-content: center;
 
     background-color: var(--firstColor);
     color: var(--secondColor);
     border-radius: 10px;
     
+}
+
+@media screen and (max-width: 800px) {
+    .title{
+        font-size: calc(var(--first-headline-size)* 0.8);
+    }
+    .innerselectbar{
+        grid-template-columns: repeat(2, minmax(150px,1fr));
+        grid-row-gap: 2vH;
+    }
+    .arraybar{
+        width: min(20px,calc(1.2px * (200/var(--number-of-bars))));
+    }
+    .count{
+        font-size: 1.5rem;
+    }
 }

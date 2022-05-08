@@ -16,11 +16,13 @@
  
 }
 
-/* .chapter{
-  width: 70%;
-  margin: auto;
-} */
-
+@media screen and (max-width: 1000px){
+  .page{
+    grid-template-columns: minmax(0,85vW);
+  }
+}
 @media screen and (max-width: 500px){
-  
+  .page{
+    grid-template-columns: minmax(0,85vW);
+  }
 }
