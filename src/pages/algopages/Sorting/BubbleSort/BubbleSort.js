@@ -3,6 +3,7 @@ import classes from "../SortingStyle.module.css"
 import { getAnimationBubbleSort } from "./bubblesortalgorithm";
 
 import { useState, useEffect } from "react"
+import { getByRole } from "@testing-library/react";
 
 function randomIntFromInterval(min, max) {
     // min and max included
@@ -13,9 +14,9 @@ const MAX_BAR_LENGTH = 500;
 const MAX_SPEED = 1000;
 
 function disableInputs(){ 
-    Array.from(document.getElementsByTagName('button')).forEach((e) => {
-        e.disabled = true;
-    });
+    // Array.from(document.getElementsByTagName('button')).forEach((e) => {
+    //     e.disabled = true;
+    // });
     Array.from(document.getElementsByTagName('input')).forEach((e) => {
         e.disabled = true;
     });
@@ -46,6 +47,7 @@ function BubbleSort(props){
 
 
     var resetArray = function() {
+        clearAllTimeouts();
         const temp_array = [];
         for (let i = 0; i < size; i++) {
           temp_array.push(randomIntFromInterval(5, MAX_BAR_LENGTH));
@@ -54,6 +56,17 @@ function BubbleSort(props){
         setArray(temp_array);
 
         document.getElementById("counter").innerHTML = 0;
+    }
+    var clearAllTimeouts = function(){
+        const highestId = window.setTimeout(() => {
+            for (let i = highestId; i >= 0; i--) {
+              window.clearInterval(i);
+            }
+          }, 0);
+        const bars = document.getElementsByClassName(classes.arraybar);
+        for(var bar of bars){
+            bar.style.backgroundColor = standard_color;
+        }
     }
     
     // var appendToArray = function(v){
@@ -86,6 +99,9 @@ function BubbleSort(props){
     }
 
     async function doAnimations(){
+        clearAllTimeouts();
+
+
         disableInputs();
 
         const counter = document.getElementById("counter");
