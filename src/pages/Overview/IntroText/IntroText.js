@@ -1,6 +1,7 @@
 import classes from "./IntroText.module.css"
 
 function IntroText(){
+
     return (
         <div className={classes.outer}>
             <div className={classes.title} >
@@ -10,19 +11,17 @@ function IntroText(){
                 </div>  
             </div>
             <p className={classes.text}>
-                Lorem ipsum dolor sit amet, 
-                consetetur sadipscing elitr, sed diam nonumy e
-                irmod tempor invidunt ut labore et dolore magn
-                a aliquyam erat, sed diam voluptua. At vero eos et 
-                accusam et justo duo dolores et ea rebum. Stet clita
-                kasd gubergren, no sea takimata sanctus est Lorem ips
-                
-                um dolor sit amet. Lorem ipsum dolor sit amet, consetetur 
-                sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut 
-                labore et dolore magna aliquyam erat, sed diam voluptua. At 
-                vero eos et accusam et justo duo dolores et ea rebum. Stet clita 
-                kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                amet.
+               I am happy to see you here one my website!
+               I dont know how you even got here but now your here. 
+               <br />
+               This website is still in a very early develpment stage and thus you could stumble over quite o few bugs.
+               <br />
+               The purpose of this website is to visulize diffrent algorihtms.
+               My goal is that you will be alble to understand how these algorihtms work and get a deeper understanding of them.
+               <br/> <br />
+               ...also...it looks cool...
+               <br /> <br />
+                Have fun!
             </p>
         </div>
     )

@@ -194,7 +194,7 @@
         grid-row-gap: 2vH;
     }
     .arraybar{
-        width: min(20px,calc(1.2px * (200/var(--number-of-bars))));
+        width: calc(1.2px * (200/var(--number-of-bars)));
     }
     .count{
         font-size: 1.5rem;
