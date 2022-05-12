@@ -39,6 +39,8 @@ function BubbleSort(props){
     const [size, setSize] = useState(50);
     const [speed, setSpeed] = useState(10);
 
+    const [inSort, setInSort] = useState(false);
+
 
     const root = document.querySelector(':root');
     const animation_color = window.getComputedStyle(document.documentElement).getPropertyValue("--animation-color")
@@ -46,7 +48,9 @@ function BubbleSort(props){
 
 
     var resetArray = function() {
-        clearAllTimeouts()
+        enableInputs();
+        clearAllTimeouts();
+        resetBarColor();
         const temp_array = [];
         for (let i = 0; i < size; i++) {
           temp_array.push(randomIntFromInterval(5, MAX_BAR_LENGTH));
@@ -57,12 +61,16 @@ function BubbleSort(props){
         document.getElementById("counter").innerHTML = 0;
     }
 
-    var clearAllTimeouts = function(){ //also resets bar color
+    var clearAllTimeouts = function(){ //stops the animation
+        setInSort(false);
         const highestId = window.setTimeout(() => {
             for (let i = highestId; i >= 0; i--) {
               window.clearInterval(i);
             }
           }, 0);
+       
+    }
+    var resetBarColor = function(){
         const bars = document.getElementsByClassName(classes.arraybar);
         for(var bar of bars){
             bar.style.backgroundColor = standard_color;
@@ -102,6 +110,7 @@ function BubbleSort(props){
     async function doAnimations(){
         clearAllTimeouts();
         disableInputs();
+        setInSort(true);
 
         const counter = document.getElementById("counter");
 
@@ -156,7 +165,7 @@ function BubbleSort(props){
         setTimeout(()=>{ // after sort
             root.style.setProperty("--animation-duration","0.5s")
             setArray(temp_array);
-
+            setInSort(false);
             enableInputs();
         },n*duration);
     }
@@ -167,9 +176,17 @@ function BubbleSort(props){
             <div className={classes.selectbar}>
                 <div className={classes.innerselectbar}>
                     <div className={[classes.selectellement]}>
+                        {inSort ? 
+                        <button className={classes.btn} onClick={()=>{
+                            clearAllTimeouts();
+                            resetBarColor();
+                            }}>
+                            Stop Sort
+                        </button>: 
                         <button className={classes.btn} onClick={doAnimations}>
                             Start Sort
                         </button>
+                        }
                     </div>
                     <div className={[classes.selectellement]}>
                         <button className={classes.btn} onClick={resetArray}>
