@@ -49,7 +49,6 @@ function BubbleSort(props){
 
 
     var resetArray = function() {
-        enableInputs();
         clearAllTimeouts();
         resetBarColor();
         const temp_array = [];
@@ -64,6 +63,7 @@ function BubbleSort(props){
 
     var clearAllTimeouts = function(){ //stops the animation
         setInSort(false);
+        enableInputs();
         const highestId = window.setTimeout(() => {
             for (let i = highestId; i >= 0; i--) {
               window.clearInterval(i);
