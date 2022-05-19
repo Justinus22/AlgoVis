@@ -19,7 +19,7 @@ function doQuickSort(array,animations,l,h){
 }
 
 function partition(arr,animations,l,h){
-    let pivot = arr[h];
+    let pivot = arr[h]; // last element in subarray
 
     let i = l - 1;
     for(let j = l;j <= h - 1; j++){
