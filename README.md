@@ -3,12 +3,14 @@
 Hey, this is my little Projct i´m working on right now.
 Its nothing fancy but i enjoy the process of creating a little website like this.
 
- ### `eary development stage !!!`
+ ### `very eary development stage !!!`
 
 
 
-standard stuff:
-
+# standard stuff:
+.
+.
+.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

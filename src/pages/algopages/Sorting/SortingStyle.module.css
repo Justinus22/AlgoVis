@@ -20,6 +20,38 @@
     margin: 0;
     color: var(--firstColor);
     font-size: var(--first-headline-size);
+    text-align: center;
+}
+
+.favouritebutton{
+    margin: 1vW;
+    padding: 0;
+    width:5vW;
+    aspect-ratio: 1 / 1;
+
+    background-color: var(--firstColor);
+
+    justify-self: right;
+
+    border: none;
+    border-radius: 50%;
+
+    transition: 0.5s;
+
+    display: grid;
+    place-items: center;
+}
+
+.favouritebutton:hover{
+    transform: scale(1.2);
+}
+
+.titlefavwrapper{
+    position: relative;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    
 }
 .selectbar{
     margin: auto;

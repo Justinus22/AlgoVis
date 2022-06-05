@@ -4,21 +4,30 @@ import app from "../../firebase/initfirebase"
 
 import { AuthContext } from "../../contexts/Auth.js"
 
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import { getAuth, signOut } from "firebase/auth";
+import {getDatabase,ref, onValue} from "firebase/database"
 
 import { Redirect } from "react-router";
 
 function Account() {
 
-  const user = useContext(AuthContext);
+  const user = useContext(AuthContext).currentUser;
   const auth = getAuth();
+  const db = getDatabase();
 
-  if(Object.is(user.currentUser,null)){
-    return (
-      <Redirect to="/account/login" />
-    );
+  const [username, setUsername] = useState("");
+  
+
+  
+
+  const getUsername = function(user, db){
+      onValue(ref(db, "users/" + user.uid +"/username"), (DataSnapshot) => {
+          const data = DataSnapshot.val();
+          setUsername(data)
+      })
+
   }
 
   const signout = () => {
@@ -29,8 +38,21 @@ function Account() {
     });
   }
 
+  useEffect(() => {
+    getUsername(user, db)
+  }, [])
+  
+
+  if(Object.is(user,null)){
+    return (
+      <Redirect to="/account/login" />
+    );
+  }
+
+    
   return (
     <div>
+      <h1> Welcome {username}</h1>
       <button onClick={signout}> Sign Out </button>
     </div>
   );
