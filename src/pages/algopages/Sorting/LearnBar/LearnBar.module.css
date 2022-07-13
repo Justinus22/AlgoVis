@@ -1,0 +1,45 @@
+.outer{
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    min-width: 0px;
+
+    align-items: center;
+}
+
+.dartdiv{
+    position: relative;
+    transition: 0.5s;
+    width: 5vW;
+    height: 5vW;
+    min-width: 0px;
+}
+
+.right{
+    transform: rotate(-90deg);
+}
+.left{
+    transform: rotate(90deg);
+}
+
+.outertextcontainer{
+    position: relative;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    justify-items: center;
+    align-items: center;
+    
+}
+.numeration{
+    font-size: 3vW;
+    margin: 0;
+    margin-left: 3vW;
+}
+
+.textcontainer{
+    position: relative;
+    height: fit-content;
+
+    font-size: min(30px,2vW);    
+}

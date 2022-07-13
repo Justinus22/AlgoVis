@@ -13,6 +13,9 @@ import classes from "./SortingStyle.module.css"
 
 const MAX_BAR_LENGTH = 500;
 const MAX_SPEED = 1000;
+const SCREEN_WIDTH = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+const MAX_NUM_OF_BARS = (SCREEN_WIDTH * 0.8) / 3; //screewidth * 0.8 = to the width of sort area
+                                                 // :3 because min width of a bar is 3px 
 
 function randomIntFromInterval(min, max) {
     // min and max included
@@ -45,11 +48,18 @@ var resetArray = function(size,
     }
     root.style.setProperty("--number-of-bars", size);
     setArray(temp_array);
-
-    document.getElementById("counter").innerHTML = 0;
 }
 
-var resetBarColor = function(standard_color){
+var setArrayToBars = function(setArray){ // sets the values of the state array to the displayed bar heights
+    let temp = []
+    for(let bar of document.getElementsByClassName(classes.arraybar)){
+        temp.push(parseInt(bar.style.height.slice(0,-2)))
+    }
+    console.log(temp)
+    setArray(temp);
+}
+
+const resetBarColor = function(standard_color){
     const bars = document.getElementsByClassName(classes.arraybar);
     for(var bar of bars){
         bar.style.backgroundColor = standard_color;
@@ -73,11 +83,13 @@ function enableInputs(){
     });
 }
 
+
 async function doAnimations(array,
                             setArray,
                             algo_func,
                             speed,
                             setInSort,
+                            setCount,
                             root,
                             animation_color,
                             standard_color){
@@ -85,17 +97,14 @@ async function doAnimations(array,
     setInSort(true);
     disableInputs();
 
-    const counter = document.getElementById("counter");
-
     root.style.setProperty("--animation-duration","0.1s");
     
-    let helper_array = array.slice();
+    // let helper_array = array.slice();
     const [animations , temp_array] = algo_func(array.slice())
     let n = animations.length;
     const duration = (MAX_SPEED+1) / (speed * 3)
 
-    let count;
-    counter.innerHTML = 0;
+
     for(let i = 0;i<n;i++){
         const bars = document.getElementsByClassName(classes.arraybar)
         
@@ -103,13 +112,14 @@ async function doAnimations(array,
         let secondBar = bars[animations[i].animation[1]].style;
         let value = `${animations[i].value}px`
 
-        count = 0;
+        
+
                    
         if(animations[i].state === "swap"){ 
 
-            setTimeout(() => {
-                count++;
-                counter.innerHTML = count;
+            setTimeout(function(){
+                setCount(i);
+                
                 let temp = firstBar.height;
                 firstBar.height = secondBar.height;
                 secondBar.height = temp;
@@ -117,9 +127,8 @@ async function doAnimations(array,
             }, i * duration);
 
         } else if(animations[i].state === "compare"){
-            setTimeout(() => {
-                count++;
-                counter.innerHTML = count;
+            setTimeout(function(){
+                setCount(i);
                 if(duration > 2) {
                     firstBar.backgroundColor = animation_color;
                     secondBar.backgroundColor = animation_color;
@@ -134,10 +143,9 @@ async function doAnimations(array,
         }else if(animations[i].state === "set"){ 
 
             setTimeout(() => {
-                count++;
-                counter.innerHTML = count;
-                firstBar.height = value;
+                setCount(i);
                 
+                firstBar.height = value;
             }, i * duration);
         }
     }
@@ -152,9 +160,11 @@ async function doAnimations(array,
 
 export { resetArray,
         resetBarColor,
+        setArrayToBars,
         clearAllTimeouts,
         enableInputs,
         disableInputs,
         MAX_BAR_LENGTH,
-        MAX_SPEED }
+        MAX_SPEED,
+        MAX_NUM_OF_BARS}
 export default doAnimations;

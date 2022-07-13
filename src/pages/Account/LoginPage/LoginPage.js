@@ -2,13 +2,11 @@ import classes from "./LoginPage.module.css"
 
 import { Link } from "react-router-dom"
 
-import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
+import React, {useContext } from "react";
+import { Redirect } from "react-router";
 import { AuthContext } from "../../../contexts/Auth.js";
 
 import app from "../../../firebase/initfirebase";
-import { getDatabase, ref, set} from "firebase/database";
-
 
 function LoginPage(props){
 

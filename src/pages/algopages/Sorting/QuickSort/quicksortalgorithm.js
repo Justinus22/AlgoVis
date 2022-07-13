@@ -1,9 +1,6 @@
 export function getAnimationQuickSort(array){
     let animations = [];
-    console.log(array)
     doQuickSort(array,animations,0,array.length-1)
-
-    console.log(array)
     return [animations,array]
 }
 

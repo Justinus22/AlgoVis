@@ -3,18 +3,33 @@ import classes from "./Navbar.module.css"
 import LogoDoubleDart from "../../svg/LogoDoubleDart.js"
 import LogoSingleDart from "../../svg/LogoSingleDart.js"
 
-import { AuthContext } from "../../../contexts/Auth";
-
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useRef} from "react";
 
 import { Link } from "react-router-dom"
 
+// import {getDatabase,ref, onValue} from "firebase/database"
+
 function Navbar(props) {
 
-  const {currentUser} = useContext(AuthContext);
+  //user handeling
 
+  // const {currentUser} = useContext(AuthContext);
 
-  let isMobile;
+  // const [username, setUsername] = useState();
+  
+  // const getUsername = function(user, db){
+  //     const usernameRef = ref(db, "users/" + user.uid +"/username");
+       
+  //     onValue(usernameRef, (DataSnapshot) => {
+  //         const data = DataSnapshot.val();
+  //         setUsername(data)
+  //     })
+
+  // }
+
+  //animation handeling
+
+  const isMobile = useRef();
 
   let root = document.querySelector(':root');
   
@@ -41,7 +56,7 @@ function Navbar(props) {
       
     }
 
-    if(currentLocation === "/" && !isMobile){
+    if(currentLocation === "/" && !isMobile.current){
       root.style.setProperty("--navbar-start-height", (NAVBARSTARTHEIGHTHELPER- (offset/ANIMATIONMULTIPLIER)) + "vH");
       root.style.setProperty("--title-size", TITLESIZEHELPER - (offset/ANIMATIONMULTIPLIER) + "px")
       root.style.setProperty("--navbar-end-height", NAVBARENDHEIGHT_START);
@@ -81,9 +96,11 @@ function Navbar(props) {
 
    
   useEffect(() => {
-    isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    isMobile.current = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     handleScoll()
     window.addEventListener("scroll",handleScoll);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
   
   return (

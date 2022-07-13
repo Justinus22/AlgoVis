@@ -1,6 +1,5 @@
 import classes from "./SignupPage.module.css"
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set} from "firebase/database";
 
 import { useContext } from "react";
@@ -21,10 +20,10 @@ function SignupPage(props){
 
         const { email, password, name } = event.target.elements;
 
-        if(name.value == ""){
+        if(name.value === ""){
             alert("Please enter a name.")
         } else {
-            app.auth().createUserWithEmailAndPassword(email.value, password.value)
+            app.auth().createUserWithEmailAndPassword(email.value, password.value) // no import for this func nessecary
             .then((userCredential) => {
                 set(ref(db, 'users/' + userCredential.user.uid), {
                     username: name.value,

@@ -2,11 +2,14 @@ import classes from "./SortingStyle.module.css"
 
 import FavouriteStar from "../../../components/svg/FavouriteStar";
 
-import doAnimations, {resetArray, resetBarColor, clearAllTimeouts, MAX_SPEED} from "./animation.js";
+import doAnimations, {resetArray, resetBarColor, setArrayToBars, clearAllTimeouts, MAX_SPEED,  MAX_NUM_OF_BARS} from "./animation.js";
 import { AuthContext } from "../../../contexts/Auth.js"
 
-import { useState, useEffect, useContext } from "react"
-import { getDatabase, ref, set, onValue, DataSnapshot } from "firebase/database"
+import LearnBar from "./LearnBar/LearnBar";
+// import ExplanationBar from "./ExplanationBar/ExplanationBar";
+
+import { useState, useEffect, useContext} from "react"
+import { getDatabase, ref, set, onValue} from "firebase/database"
 
 function SortingPage(props){
 
@@ -22,17 +25,27 @@ function SortingPage(props){
 
     const [inSort, setInSort] = useState(false);
 
+    const [count, setCount] = useState(0);
+
     const [isFavourite, setIsFavourite] = useState(false)
 
+    const [isLearnMode, setIsLearnMode] = useState(false);
+
     const root = document.querySelector(':root');
+
     const animation_color = window.getComputedStyle(document.documentElement).getPropertyValue("--animation-color")
     const standard_color = window.getComputedStyle(document.documentElement).getPropertyValue("--firstColor")
 
     useEffect(() => {
+
         resetArray(size,root, standard_color, setArray, setInSort)
         getFavourite(user,props.title,db,true)
         window.scrollTo(0, 0);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
+
+
 
 
     const addNewUserFavourite = function(user, favourite, db){
@@ -71,6 +84,15 @@ function SortingPage(props){
         }
     }
 
+    const handleLearnModeButton = function(){
+        if(!isLearnMode){
+            resetArray(10,root, standard_color, setArray, setInSort)
+        }
+        setIsLearnMode(!isLearnMode);
+
+        resetBarColor(standard_color);        
+    }
+
 
     let arr_size_element = document.querySelector("#size")
     if(arr_size_element){
@@ -86,31 +108,54 @@ function SortingPage(props){
         })
     }
 
+
    
     return (
         <div className={classes.outer}>
             <div className={classes.titlefavwrapper}>
-                <div></div>
+                <button onClick={handleLearnModeButton} className={classes.selectbutton +" "+ classes.learnbtn}>
+                    <p className={classes.learntitle}>Learn</p>
+                </button>
+
                 <p className={classes.title}>{props.title}</p>
 
-                <button onClick={handleFavouriteButton} className={classes.favouritebutton}>
-                    <FavouriteStar size="2.5vW" color={isFavourite ? favouritesColor : firstColor}/>
+                <button onClick={handleFavouriteButton} className={classes.selectbutton + " "+ classes.favbtn}>
+                    <FavouriteStar size="max(15px,2.5vW)" color={isFavourite ? favouritesColor : firstColor}/>
                 </button>
             </div>
+            {/* {isLearnMode ? 
+            <>
+                <ExplanationBar title={props.title} />
+            </>
+            : null} */}
             <div className={classes.selectbar}>
+                {isLearnMode ? 
+                <>
+                    <LearnBar sort={props.algorithm(array.slice())} setarr={setArray} setcount={setCount}/>
+                </>
+                :
                 <div className={classes.innerselectbar}>
                     <div className={[classes.selectellement]}>
                         {inSort ? 
                         <button className={classes.btn} onClick={()=>{
                             clearAllTimeouts(setInSort);
                             resetBarColor(standard_color);
+                            setArrayToBars(setArray);
                             console.log(array)
                             }}>
                             Stop Sort
                         </button>: 
                         <button className={classes.btn} onClick={() => {
-
-                            doAnimations(array,setArray,props.algorithm,speed,setInSort,root,animation_color,standard_color)
+                            console.log(array)
+                            doAnimations(array,
+                                        setArray,
+                                        props.algorithm,
+                                        speed,
+                                        setInSort,
+                                        setCount,
+                                        root,
+                                        animation_color,
+                                        standard_color)
                         }}>
                             
                             Start Sort
@@ -127,7 +172,7 @@ function SortingPage(props){
                     <div className={classes.selectellement}>
                         <div className={classes.slidercontainer}>
                             Size
-                            <input id="size"type="range" min="10" max="500" step={1} className={classes.slider}/>
+                            <input id="size"type="range" min="3" max={MAX_NUM_OF_BARS}step={1} className={classes.slider}/>
                         </div>
                     </div>
                     <div className={classes.selectellement}>
@@ -137,6 +182,7 @@ function SortingPage(props){
                         </div>  
                     </div>
                 </div>
+                }
             </div>
             <div className={classes.sortdiv}>
                 {array.map((value, idx) => (
@@ -145,12 +191,18 @@ function SortingPage(props){
                     key={idx}
                     style={{
                         height: `${value}px`,
-                    }}></div>
+                    }}>{isLearnMode ? 
+                    <div className={classes.arraybarnum}>
+                        {idx}
+                    </div>
+                    :null}</div>
+                    
                 ))}
             </div>
+            
             <div className={classes.count}>
                     Actions: 
-                    <div id="counter">0</div>
+                    <div id="counter">{count}</div>
             </div>
         </div>
     );
