@@ -42,6 +42,8 @@ function SortingPage(props){
         getFavourite(user,props.title,db,true)
         window.scrollTo(0, 0);
 
+        // sortable(Array.from(document.getElementsByClassName(classes.sortdiv))[0], (item) => {})
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
@@ -72,7 +74,7 @@ function SortingPage(props){
     }
 
 
-    const handleFavouriteButton = function(){
+    const handleFavouriteButton = function(){p
         if(user){
             if(isFavourite){
                 removeNewUserFavourite(user, props.title, db)
@@ -107,6 +109,57 @@ function SortingPage(props){
             setSpeed(animation_speed_element.value);
         })
     }
+
+
+    // function sortable(section, onUpdate) {
+    //     var dragEl, nextEl, newPos, dragGhost;
+
+        
+    //     let oldPos = [...section.children].map((item) => {
+    //         item.draggable = true;
+    //         let pos = document.getElementById(item.id).getBoundingClientRect();
+    //         return pos;
+    //       });
+        
+    //       function _onDragOver(e) {
+    //         e.preventDefault();
+        
+    //         var target = e.target;
+    //         if (target && target !== dragEl && target.nodeName == "DIV") {
+    //             var targetPos = target.getBoundingClientRect();
+    //             var next =
+    //             (e.clientY - targetPos.top) / (targetPos.bottom - targetPos.top) >
+    //               0.5 ||
+    //             (e.clientX - targetPos.left) / (targetPos.right - targetPos.left) > 0.5;             
+    //             section.insertBefore(dragEl, (next && target.nextSibling) || target);
+    //         }
+    //       }
+        
+    //       function _onDragEnd(evt) {
+    //         evt.preventDefault();
+    //         newPos = [...section.children].map((child) => {
+    //           let pos = document.getElementById(child.id).getBoundingClientRect();
+    //           return pos;
+    //         });
+        
+    //         dragEl.classList.remove(classes.ghost);
+    //         section.removeEventListener("dragover", _onDragOver, false);
+    //         section.removeEventListener("dragend", _onDragEnd, false);
+    //       }
+        
+    //       section.addEventListener("dragstart", function (e) {
+    //         dragEl = e.target;
+        
+    //         section.addEventListener("dragover", _onDragOver, false);
+    //         section.addEventListener("dragend", _onDragEnd, false);
+        
+    //         setTimeout(function () {
+    //           dragEl.classList.add(classes.ghost);
+    //         }, 0);
+    //       }); 
+    //   }
+
+      
 
 
    
@@ -184,11 +237,12 @@ function SortingPage(props){
                 </div>
                 }
             </div>
-            <div className={classes.sortdiv}>
+            <section className={classes.sortdiv}>
                 {array.map((value, idx) => (
                     <div
                     className={classes.arraybar}
                     key={idx}
+                    id={idx}
                     style={{
                         height: `${value}px`,
                     }}>{isLearnMode ? 
@@ -198,7 +252,7 @@ function SortingPage(props){
                     :null}</div>
                     
                 ))}
-            </div>
+            </section>
             
             <div className={classes.count}>
                     Actions: 

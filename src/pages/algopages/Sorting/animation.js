@@ -109,7 +109,10 @@ async function doAnimations(array,
         const bars = document.getElementsByClassName(classes.arraybar)
         
         let firstBar = bars[animations[i].animation[0]].style;
-        let secondBar = bars[animations[i].animation[1]].style;
+        let secondBar = undefined;
+        if(animations[i].animation[1] !== -1){
+            secondBar = bars[animations[i].animation[1]].style ;
+        }
         let value = `${animations[i].value}px`
 
         
@@ -140,7 +143,7 @@ async function doAnimations(array,
             }, i * duration);
 
             
-        }else if(animations[i].state === "set"){ 
+        }else if(animations[i].state === "set" || animations[i].state === "overwrite"){ 
 
             setTimeout(() => {
                 setCount(i);

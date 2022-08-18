@@ -41,5 +41,6 @@
     position: relative;
     height: fit-content;
 
-    font-size: min(30px,2vW);    
+    font-size: clamp(13px, 2vW, 30px);    
 }
+

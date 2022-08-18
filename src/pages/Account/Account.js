@@ -16,42 +16,37 @@ function Account() {
   const db = getDatabase();
 
   const [username, setUsername] = useState();
-  
-  const getUsername = function(user, db){
-      const usernameRef = ref(db, "users/" + user.uid +"/username");
-       
-      onValue(usernameRef, (DataSnapshot) => {
-          const data = DataSnapshot.val();
-          setUsername(data)
-      })
-
-  }
-
   const [favourites, setFavourites] = useState([]);
 
-  const getFavourites = function(user, db){
-    const usernameRef = ref(db, "users/" + user.uid +"/favourites");
+  const getUsername = function(user, db){
+    const usernameRef = ref(db, 'users/' + user.uid +'/username'); // double quote may cause trouble with firebase for unknown reaseon
      
     onValue(usernameRef, (DataSnapshot) => {
         const data = DataSnapshot.val();
-        setFavourites(Object.keys(data).map((sort) => data[sort].isFavourite ? sort : null)
-                                        .filter(f => f !== null))
+        setUsername(data)
     })
 
 }
 
-  const signout = () => {
-    signOut(auth).then(() => {
-      console.log("Signed Out")
-    }).catch((error) => {
-      // An error happened.
-    });
-  }
+
+
+const getFavourites = function(user, db){
+  const usernameRef = ref(db, 'users/' + user.uid +'/favourites');
+   
+  onValue(usernameRef, (DataSnapshot) => {
+      const data = DataSnapshot.val();
+      setFavourites(Object.keys(data).map((sort) => data[sort].isFavourite ? sort : null)
+                                      .filter(f => f !== null))
+  })
+
+}
 
 
   useEffect(() => {
-      getUsername(user, db)
-      getFavourites(user,db);
+      if(!Object.is(user,null)) {
+        getUsername(user, db)
+        getFavourites(user,db);
+      }
   }, [user,db])
 
 
@@ -59,6 +54,18 @@ function Account() {
     return (
       <Redirect to="/account/login" />
     );
+  }
+
+  
+  
+
+
+  const signout = () => {
+    signOut(auth).then(() => {
+      console.log("Signed Out")
+    }).catch((error) => {
+      // An error happened.
+    });
   }
 
     

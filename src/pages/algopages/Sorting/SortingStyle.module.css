@@ -197,7 +197,8 @@ transition: opacity .2s;
     
     display: grid;
     grid-template-columns: repeat(var(--number-of-bars), minmax(2px,1fr));
-    grid-column-gap: 0;
+    grid-gap: 0;
+    grid-auto-flow: row dense;
 
     align-items: var(--sorting-bar-align);
 
@@ -242,6 +243,18 @@ transition: opacity .2s;
     border-radius: 10px;
     
 }
+
+
+.ghost {
+    border: 1px dashed var(--firstColor);
+    background-color: var(--secondColor) !important;
+    color: var(--firstColor);
+  }
+  
+  .transition {
+    transition: all 2s ease-out 0.5s;
+    top: 0;
+  }
 
 @media screen and (max-width: 800px) {
     .title{

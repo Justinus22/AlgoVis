@@ -26,7 +26,10 @@ function LearnBar(props){
         resetBarColor(standard_color);
         
         let firstBar = bars[sort[pos].animation[0]].style;
-        let secondBar = bars[sort[pos].animation[1]].style;
+        let secondBar = undefined;
+        if(sort[pos].animation[1] !== -1){
+            secondBar = bars[sort[pos].animation[1]].style ;
+        }
         let value = `${sort[pos].value}px`
 
         if(sort[pos].state === "swap"){ 
@@ -40,7 +43,7 @@ function LearnBar(props){
             firstBar.backgroundColor = animation_color;
             secondBar.backgroundColor = animation_color;
           
-        }else if(sort[pos].state === "set"){ 
+        }else if(sort[pos].state === "set" || sort[pos].state === "overwrite"){ 
 
                 firstBar.height = value;
                 
@@ -58,8 +61,12 @@ function LearnBar(props){
                 container.item(0).textContent = "Swap value of elements " + sort[pos].animation[0] + " and " + sort[pos].animation[1] +"."
             }
             else if (sort[pos].state === "set") {
-                container.item(0).textContent = "Set element " + sort[pos].animation[0] + " to value " + sort[pos].value +".";
-            }             
+                container.item(0).textContent = "Set element " + sort[pos].animation[0] + " to stored value " + sort[pos].value +".";
+            }else if(sort[pos].state === "store"){
+                container.item(0).textContent = "Store the value " + sort[pos].value + " of element " + sort[pos].animation[0] + " for later.";
+            }else if(sort[pos].state === "overwrite"){
+                container.item(0).textContent = "Overwrite the value of element " + sort[pos].animation[0] + " with element " + sort[pos].animation[1] +".";              
+            }
         }
     }
 
