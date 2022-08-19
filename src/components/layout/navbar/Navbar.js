@@ -7,11 +7,11 @@ import { useEffect, useState, useRef} from "react";
 
 import { Link } from "react-router-dom"
 
-// import {getDatabase,ref, onValue} from "firebase/database"
+// import {getDatabase,ref, onValue} from "firebase/database" // for user handle
 
 function Navbar(props) {
 
-  //user handeling
+  //user handeling 
 
   // const {currentUser} = useContext(AuthContext);
 
@@ -27,11 +27,13 @@ function Navbar(props) {
 
   // }
 
-  //animation handeling
+  //animation handling
 
   const isMobile = useRef();
+  const viewportWidth = useRef();
 
   let root = document.querySelector(':root');
+  let dropdownMenuCollection = document.getElementsByClassName(classes.dropdown);
   
   const ANIMATIONMULTIPLIER = 1.5;
 
@@ -44,9 +46,14 @@ function Navbar(props) {
 
   const NAVELWIDTH = 15 + "vW"; // final width of the nav elements
 
+  const MAXSCREENFORMOBILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--max-screen-for-mobile").slice(0,-2)); // [px] // the max width in which the site will displayed as a mobile device
+  console.log(MAXSCREENFORMOBILE)
+
   const [logoState, setLogoState] = useState(true) // if logo should be displayed in title or not
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  
   const handleScoll = function(){
     var currentLocation = window.location.pathname;
     var offset = window.pageYOffset || document.documentElement.scrollTop
@@ -55,8 +62,7 @@ function Navbar(props) {
       offset = 88 * ANIMATIONMULTIPLIER;
       
     }
-
-    if(currentLocation === "/" && !isMobile.current){
+    if(currentLocation === "/" && !isMobile.current && viewportWidth.current > MAXSCREENFORMOBILE){
       root.style.setProperty("--navbar-start-height", (NAVBARSTARTHEIGHTHELPER- (offset/ANIMATIONMULTIPLIER)) + "vH");
       root.style.setProperty("--title-size", TITLESIZEHELPER - (offset/ANIMATIONMULTIPLIER) + "px")
       root.style.setProperty("--navbar-end-height", NAVBARENDHEIGHT_START);
@@ -94,18 +100,42 @@ function Navbar(props) {
 
   }
 
-   
+  const handleDropdown = function(){ // open or closes the dropdown wether its already open or not
+    if(viewportWidth.current > MAXSCREENFORMOBILE) return;
+
+
+    const dropdownMenu = dropdownMenuCollection[0]
+    console.log(dropdownMenu.style.display);
+    if(!isDropdownOpen){
+      dropdownMenu.style.transform = "translateY(0)";
+
+      setIsDropdownOpen(true);
+    } else if(isDropdownOpen){
+      dropdownMenu.style.transform = "translateY(-150%)";
+      setIsDropdownOpen(false)
+    }
+  }
+
+  
+
   useEffect(() => {
     isMobile.current = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    viewportWidth.current = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     handleScoll()
     window.addEventListener("scroll",handleScoll);
+    
+    window.addEventListener('resize', function(event){ // updates Ref for dynamic changes 
+      viewportWidth.current = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    });
 
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
   
   return (
+  <div>
   <header className={classes.nav}>
-      <ul>
+      <ul className={classes.list}>
         <li className={classes.navel}>
             <a href='https://github.com/Justinus22/AlgoVis/tree/master' target="_blank" rel="noreferrer" className={classes.gitlink}> My Github </a>
         </li>
@@ -113,15 +143,15 @@ function Navbar(props) {
             <Link to="/home" className={classes.homepagelink}> Homepage </Link>
         </li>
 
-        <li className={classes.title}>
-          <Link to="/home" className={classes.titlelink}> 
+        <li>
+          <div className={classes.title} onClick={handleDropdown}>
             <div>Algorithm &nbsp;</div>
               {logoState ? 
                 <LogoDoubleDart size="30"/> : 
                 "V"
               }
             <div>isualization</div>
-           </Link>
+          </div>
         </li>
         <li className={classes.navel}>
             <Link to="/account" className={classes.accountlink}> Account </Link>
@@ -134,7 +164,24 @@ function Navbar(props) {
       <div className={classes.firstdart}><LogoSingleDart size="100" /></div>
       <div className={classes.seconddart}><LogoSingleDart size="100"/></div>
     </div>
+   
   </header>
+    {/* for devices with small screen drowdown menu */}
+    <ul className={classes.dropdown}>
+      <li className={classes.navel}>
+          <a href='https://github.com/Justinus22/AlgoVis/tree/master' target="_blank" rel="noreferrer" className={classes.gitlink}> My Github </a>
+      </li>
+      <li className={classes.navel}>
+          <Link to="/home" className={classes.homepagelink}> Homepage </Link>
+      </li>
+      <li className={classes.navel}>
+          <Link to="/account" className={classes.accountlink}> Account </Link>
+      </li>
+      <li className={classes.navel}>
+          <Link to="/websiteDetails" className={classes.detailslink}> Website Details </Link>
+       </li>
+    </ul>
+  </div>
   );
 }
 

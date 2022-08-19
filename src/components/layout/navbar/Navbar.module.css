@@ -11,6 +11,8 @@
   --navbar-end-height: 50vH;
 
   --logo-animation-display-mode: grid;
+
+  --max-screen-for-mobile: 1000px;
 }
 .nav {
   position: fixed;
@@ -22,29 +24,30 @@
 
   display: grid;
   justify-content: center;
-  grid-auto-rows: 0.8fr 1.2fr;
+
+  grid-template-rows: 1fr;
 
   background-color: var(--thirdColor);
+  border-bottom: 2px solid var(--secondColor);
 }
 
 .title{
   position: relative;
   color: var(--secondColor);
   font-weight: bold;
-  margin: auto;
 
   transition: 0.6s cubic-bezier(.13,.57,.55,.96);
 
-}
-.titlelink{
   font-size: var(--title-size);
 
   display: flex;
   align-items: center;
+  justify-items: center;
+
 }
 
 
-.nav ul {
+.list {
   position: relative;
   list-style: none;
   margin: 0;
@@ -55,9 +58,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
 }
 
-.nav ul li {
+.nav .list li {
   position: relative;
   margin: auto;
   margin-top: calc(var(--navbar-start-height)/2 - var(--title-size) - var(--ul-padding));
@@ -68,7 +72,7 @@
 
     margin: auto;
 }
-.nav a {
+ a {
   transition: 0.2s;
   text-decoration: none;
   position: relative;
@@ -76,9 +80,9 @@
   color: var(--secondColor);
 }
 
-.nav a:hover,
-.nav a:active,
-.nav a.active {
+ a:hover,
+ a:active,
+ a.active {
   color: var(--hoverColor);
 }
 
@@ -129,10 +133,52 @@
   }
 }
 
+/* dropdown menu */
+.dropdown{
+  display: grid;
+  transform: translateY(-150%);
 
-/* For Mobile */
+  position: fixed;
+  top: var(--navbar-start-height);
+
+  transition: 0.5s;
+
+  z-index: 90;
+  background-color: var(--firstColor);
+  width: 100vW;
+  list-style: none;
+
+  justify-items: center;
+  grid-row-gap: 1rem;
+
+  padding: 0;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  border-radius: 10vW;
+
+  
+
+  border: 2px solid var(--secondColor);
+}
+
+.dropdown li{
+  transition: 0.2s;
+  outline-width: 1px;
+  outline-style: hidden;
+  outline-color: var(--secondColor);
+  padding: .25rem;
+  border-radius: 10vW;
+  width: 50%;
+  text-align: center;
+}
+.dropdown li:hover{
+  outline-style: solid;
+  transform: scale(1.2);
+}
+
+/* For Mobile under 1000px -> var(--max-screen-for-mobile)*/
 @media screen and (max-width: 1000px) {
-  .navel{
+  .list .navel{
     display: none;
   }
 }

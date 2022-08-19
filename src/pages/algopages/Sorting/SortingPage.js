@@ -74,7 +74,7 @@ function SortingPage(props){
     }
 
 
-    const handleFavouriteButton = function(){p
+    const handleFavouriteButton = function(){
         if(user){
             if(isFavourite){
                 removeNewUserFavourite(user, props.title, db)
