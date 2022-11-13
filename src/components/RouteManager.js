@@ -5,6 +5,9 @@ import InsertionSort from "../pages/algopages/Sorting/InsertionSort/InsertionSor
 import MergeSort from "../pages/algopages/Sorting/MergeSort/MergeSort.js";
 import QuickSort from "../pages/algopages/Sorting/QuickSort/QuickSort.js";
 
+import LinearSearch from '../pages/algopages/Searching/LinearSearch/LinearSearch.js';
+import BinarySearch from '../pages/algopages/Searching/BinarySearch/BinarySearch.js';
+
 import LoginPage from '../pages/Account/LoginPage/LoginPage.js';
 import SignupPage from '../pages/Account/SignupPage/SignupPage.js';
 
@@ -15,6 +18,7 @@ function RouteManager() {
         {
         //Algorithm Routes
         }
+        {/* sorting */}
         <Route path={["/home/bubblesort"]} exact> 
             <BubbleSort />
         </Route>
@@ -28,6 +32,13 @@ function RouteManager() {
             <QuickSort />
         </Route>
 
+        {/* searching */}
+        <Route path={["/home/linearsearch"]} exact> 
+            <LinearSearch />
+        </Route>
+        <Route path={["/home/binarysearch"]} exact> 
+            <BinarySearch />
+        </Route>
         {
             //Account Routes
         }

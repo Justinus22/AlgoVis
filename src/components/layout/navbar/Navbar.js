@@ -5,7 +5,7 @@ import LogoSingleDart from "../../svg/LogoSingleDart.js"
 
 import { useEffect, useState, useRef} from "react";
 
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 // import {getDatabase,ref, onValue} from "firebase/database" // for user handle
 
@@ -32,6 +32,9 @@ function Navbar(props) {
   const isMobile = useRef();
   const viewportWidth = useRef();
 
+  const location = useLocation();
+  const currentLocation = useRef();
+
   let root = document.querySelector(':root');
   let dropdownMenuCollection = document.getElementsByClassName(classes.dropdown);
   
@@ -46,8 +49,7 @@ function Navbar(props) {
 
   const NAVELWIDTH = 15 + "vW"; // final width of the nav elements
 
-  const MAXSCREENFORMOBILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--max-screen-for-mobile").slice(0,-2)); // [px] // the max width in which the site will displayed as a mobile device
-  console.log(MAXSCREENFORMOBILE)
+  const MAXSCREENFORMOBILEVIEW = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--max-screen-for-mobile").slice(0,-2)); // [px] // the max width in which the site will displayed as a mobile device
 
   const [logoState, setLogoState] = useState(true) // if logo should be displayed in title or not
 
@@ -55,19 +57,20 @@ function Navbar(props) {
 
   
   const handleScoll = function(){
-    var currentLocation = window.location.pathname;
+    
     var offset = window.pageYOffset || document.documentElement.scrollTop
 
     if(offset > 88 * ANIMATIONMULTIPLIER ){
       offset = 88 * ANIMATIONMULTIPLIER;
       
     }
-    if(currentLocation === "/" && !isMobile.current && viewportWidth.current > MAXSCREENFORMOBILE){
+
+    if(currentLocation.current === "/" && !isMobile.current && viewportWidth.current > MAXSCREENFORMOBILEVIEW){
       root.style.setProperty("--navbar-start-height", (NAVBARSTARTHEIGHTHELPER- (offset/ANIMATIONMULTIPLIER)) + "vH");
       root.style.setProperty("--title-size", TITLESIZEHELPER - (offset/ANIMATIONMULTIPLIER) + "px")
       root.style.setProperty("--navbar-end-height", NAVBARENDHEIGHT_START);
 
-      if(offset >= 85 * ANIMATIONMULTIPLIER){
+      if(offset >= 88 * ANIMATIONMULTIPLIER){
           root.style.setProperty("--nav-visibility", "1");  
           setLogoState(true);     
       }else{
@@ -101,7 +104,7 @@ function Navbar(props) {
   }
 
   const handleDropdown = function(){ // open or closes the dropdown wether its already open or not
-    if(viewportWidth.current > MAXSCREENFORMOBILE) return;
+    if(viewportWidth.current > MAXSCREENFORMOBILEVIEW) return; // unneccary when thers is no dropdown
 
 
     const dropdownMenu = dropdownMenuCollection[0]
@@ -116,21 +119,44 @@ function Navbar(props) {
     }
   }
 
+  const setUpDropdown = function(){
+    if(viewportWidth.current > MAXSCREENFORMOBILEVIEW){
+      const dropdownMenu = dropdownMenuCollection[0] // if screen is to big -> no drop down
+      dropdownMenu.style.display = "none";
+    } else {
+      const dropdownMenu = dropdownMenuCollection[0] // if screen is not to big -> drop down
+      dropdownMenu.style.display = "grid";
+    }
+  }
+
   
 
   useEffect(() => {
     isMobile.current = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     viewportWidth.current = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    currentLocation.current = window.location.pathname
+
+    setUpDropdown()
     handleScoll()
+
     window.addEventListener("scroll",handleScoll);
+
     
     window.addEventListener('resize', function(event){ // updates Ref for dynamic changes 
       viewportWidth.current = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+
+      handleScoll()
+      setUpDropdown(); // sets if dropdown is displayed at all
     });
 
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  },[]); 
+
+  useEffect(() => {
+    currentLocation.current = window.location.pathname
+    console.log(currentLocation.current) // somehow this doesnt work always when this log isnt here....
+  }, [location]);
   
   return (
   <div>

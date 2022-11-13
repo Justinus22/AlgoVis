@@ -1,6 +1,6 @@
-/* .html{
+.html{
   scroll-behavior: smooth;
-} */
+}
 
   
 body {
@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
@@ -20,6 +21,7 @@ code {
 :root {
   scroll-behavior: smooth;
   --firstColor: #3399ff;
+  /* #3399ff */
   --secondColor: white;
   --thirdColor: var(--firstColor);
   --hoverColor:  #bdeaff;

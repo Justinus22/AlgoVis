@@ -27,7 +27,7 @@ function SortingPage(props){
 
     const [count, setCount] = useState(0);
 
-    const [isFavourite, setIsFavourite] = useState(false)
+    const [isFavourite, setIsFavourite] = useState(false) 
 
     const [isLearnMode, setIsLearnMode] = useState(false);
 
@@ -170,7 +170,7 @@ function SortingPage(props){
                     <p className={classes.learntitle}>Learn</p>
                 </button>
 
-                <p className={classes.title}>{props.title}</p>
+                <h2 className={classes.title}>{props.title}</h2>
 
                 <button onClick={handleFavouriteButton} className={classes.selectbutton + " "+ classes.favbtn}>
                     <FavouriteStar size="max(15px,2.5vW)" color={isFavourite ? favouritesColor : firstColor}/>
@@ -178,7 +178,7 @@ function SortingPage(props){
             </div>
             {/* {isLearnMode ? 
             <>
-                <ExplanationBar title={props.title} />
+                <ExplanationBar title={props.title} /> // <- needs texts to be written
             </>
             : null} */}
             <div className={classes.selectbar}>
@@ -242,7 +242,6 @@ function SortingPage(props){
                     <div
                     className={classes.arraybar}
                     key={idx}
-                    id={idx}
                     style={{
                         height: `${value}px`,
                     }}>{isLearnMode ? 

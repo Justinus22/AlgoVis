@@ -1,0 +1,47 @@
+body{
+    cursor: none;
+}
+
+:root{
+    --cursor-x: 300px;
+    --cursor-y: 500px;
+
+    --cursor-size: 30px
+
+    
+}
+
+.cursor{
+    position: fixed;
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+
+    pointer-events: none;
+    
+
+
+    top: calc(var(--cursor-y) - (var(--cursor-size)/2));
+    left: calc(var(--cursor-x) - (var(--cursor-size)/2));
+
+    z-index: 1000;
+
+
+    transform: rotate(180deg);
+
+
+}
+.innerdart{
+    position: absolute;
+    top: calc((-10px) / 2);
+    left: calc((var(--cursor-size) / 2) - (var(--cursor-size) - 10px) / 2);
+    z-index: 1;
+    height: calc(var(--cursor-size) - 10px);
+}
+.outerdart{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    margin: 0;
+    height: var(--cursor-size);
+}

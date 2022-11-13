@@ -1,11 +1,11 @@
-export const titleBinarySearch = 'Binary Search'
+import SearchingPage from "../SearchingPage"
 
-function BinarySearch() {
-  return (
-    <div>
-        BinarySearch
-    </div>
-  )
+function BinarySearch(props){
+    return (
+        <div>
+            <SearchingPage title="Binary Search" />
+        </div>
+    );
 }
 
 export default BinarySearch;
